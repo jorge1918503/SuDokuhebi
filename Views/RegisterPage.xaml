@@ -10,7 +10,8 @@
         <Label Text="Contraseña" FontSize="20"/>
         <Entry x:Name="PasswordEntry" Placeholder="Ingrese su contraseña" IsPassword="True"/>
 
-        <Button Text="Registrar" Clicked="OnRegisterClicked"/>
+        <Button Text="Registrar" Clicked="OnRegisterClicked" Margin="10"/>
+        <Button Text="Cancelar" Clicked="OnCancelClicked" Margin="10"/>
         <Label x:Name="MessageLabel" TextColor="Red"/>
     </VerticalStackLayout>
 </ContentPage>

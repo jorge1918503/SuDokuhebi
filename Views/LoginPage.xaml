@@ -5,9 +5,9 @@
              Title="LoginPage">
     <VerticalStackLayout Padding="20" Spacing="15">
         <Entry x:Name="usernameEntry" Placeholder="Usuario" />
-        <Entry x:Name="passwordEntry" Placeholder="Contraseña" IsPassword="True"/>
+        <Entry x:Name="passwordEntry" Placeholder="Contraseña" IsPassword="True" Completed="OnPasswordEntryCompleted"/>
         <Button Text="Iniciar Sesión" Clicked="OnLoginClicked"/>
-        <Button Text="Registrate" Clicked="OnRegisterClicked"/>
+        <Button x:Name="loginButton" Text="Registrate" Clicked="OnRegisterClicked"/>
         <Label x:Name="messageLabel" TextColor="Red"/>
     </VerticalStackLayout>
 </ContentPage>

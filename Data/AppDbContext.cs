@@ -12,7 +12,7 @@ namespace SuDokuhebi.Data
     {
         public DbSet<Player> Players { get; set; }
 
-        public DbSet<Game> Games { get; set; }
+        //public DbSet<Game> Games { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

@@ -37,8 +37,14 @@ public partial class LoginPage : ContentPage
             {
                 messageLabel.Text = "Inicio de sesión exitoso";
                 messageLabel.TextColor = Colors.Green;
-                // Redirigir a la pantalla principal si es necesario
 
+                // Redirigir a la pantalla principal
+                // Verifica si hay al menos una ventana abierta en la aplicación
+                if (Application.Current?.Windows?.Count > 0)
+                {
+                    // Cambia la pagina principal a la TabbedPage para no poder volver atrás
+                    Application.Current.Windows[0].Page = new MenuTabbedPage();
+                }
             }
             else
             {
@@ -51,11 +57,15 @@ public partial class LoginPage : ContentPage
 
         // Rehabilitar el botón después de que se complete el procesamiento
         button.IsEnabled = true;
-
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new RegisterPage());
+    }
+
+    private void OnPasswordEntryCompleted(object sender, EventArgs e)
+    {
+        OnLoginClicked(loginButton, EventArgs.Empty);
     }
 }

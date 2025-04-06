@@ -29,4 +29,12 @@ public partial class RegisterPage : ContentPage
         // Rehabilitar el botón después de que se complete el procesamiento
         button.IsEnabled = true;
     }
+
+    private async void OnCancelClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
+
+
 }
