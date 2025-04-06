@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SuDokuhebi.Views.RegisterPage"
+             Title="RegisterPage">
+    <VerticalStackLayout Padding="20">
+        <Label Text="Usuario" FontSize="20"/>
+        <Entry x:Name="UsernameEntry" Placeholder="Ingrese su usuario"/>
+
+        <Label Text="Contraseña" FontSize="20"/>
+        <Entry x:Name="PasswordEntry" Placeholder="Ingrese su contraseña" IsPassword="True"/>
+
+        <Button Text="Registrar" Clicked="OnRegisterClicked"/>
+        <Label x:Name="MessageLabel" TextColor="Red"/>
+    </VerticalStackLayout>
+</ContentPage>
