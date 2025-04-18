@@ -4,15 +4,41 @@
              x:Class="SuDokuhebi.Views.GamePage"
              Title="GamePage">
     <VerticalStackLayout>
-        <Label 
-            Text="Soy la partida"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button
-            Text="Salir"
-            Clicked="OnEndClicked"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" 
-            Margin="10"/>
+
+        <HorizontalStackLayout WidthRequest="700">
+
+            <Label x:Name="Movements"
+                   Text="Movimientos: 0"
+                   FontSize="18"
+                   Margin="10"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center" />
+
+            <Label x:Name="TimerLabel"
+                   Text="Tiempo: 0s"
+                   FontSize="18"
+                   Margin="10"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center" />
+
+        </HorizontalStackLayout>
+
+        <Grid x:Name="GameGrid"
+              Padding="3"
+              RowSpacing="2"
+              ColumnSpacing="2"
+              WidthRequest="700"
+              HeightRequest="600">
+            <!-- Celdas del Sudoku se generan dinámicamente -->
+        </Grid>
+
+        <Button Text="Reiniciar"
+                Clicked="OnRestartClicked"
+                BackgroundColor="LightGray"
+                FontSize="18"
+                Margin="10"
+                WidthRequest="700" />
+
+
     </VerticalStackLayout>
 </ContentPage>

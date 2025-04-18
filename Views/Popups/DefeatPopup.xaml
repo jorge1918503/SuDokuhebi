@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="SuDokuhebi.Views.Popups.DefeatPopup"
+               Size="350, 350"
+               CanBeDismissedByTappingOutsideOfPopup="False">
+
+    <VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+        <!-- Título de victoria -->
+        <Label Text="¡Has perdido!"
+               FontSize="38"
+               FontAttributes="Bold"
+               TextColor="#b83dba"
+               HorizontalTextAlignment="Center" />
+
+        <!-- Línea separadora   
+       <BoxView HeightRequest="2"  
+                Color="#4CAF50"  
+                WidthRequest="160"  
+                HorizontalOptions="Center" />  -->
+
+        <!-- Movimientos -->
+        <Label x:Name="MovementsLabel"
+               FontSize="20"
+               TextColor="#333"
+               HorizontalTextAlignment="Center" />
+
+        <!-- Tiempo -->
+        <Label x:Name="TimeLabel"
+               FontSize="20"
+               TextColor="#333"
+               HorizontalTextAlignment="Center" />
+
+        <!-- Botón de navegación -->
+        <Button Text="Volver al Menú"
+                FontSize="18"
+                FontAttributes="Bold"
+                BackgroundColor="#d77cd9"
+                TextColor="#333"
+                CornerRadius="12"
+                Padding="10"
+                Clicked="OnOkClicked"
+                HorizontalOptions="Center"
+                WidthRequest="180" />
+    </VerticalStackLayout>
+</toolkit:Popup>

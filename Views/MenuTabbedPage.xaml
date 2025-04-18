@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:SuDokuhebi.Views"
              x:Class="SuDokuhebi.Views.MenuTabbedPage"
-             Title="MenuTabbedPage">
+             Title="MenuTabbedPage"
+             BarTextColor="#b83dba">
 
-    <local:HomePage/>
+    <local:PlayPage/>
     <local:RankingPage/>
     <local:HistoryPage/>
 

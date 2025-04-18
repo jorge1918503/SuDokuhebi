@@ -22,9 +22,23 @@ public partial class RegisterPage : ContentPage
         string password = PasswordEntry.Text;
 
         string result = await _playerService.RegisterPlayer(username, password);
-        MessageLabel.Text = result;
-        UsernameEntry.Text = "";
-        PasswordEntry.Text = "";
+
+        if (result == "Jugador registrado correctamente")
+        {
+            MessageLabel.TextColor = Colors.Green;
+            MessageLabel.Text = result;
+            UsernameEntry.Text = "";
+            PasswordEntry.Text = "";
+            // Redirigir a la pantalla de inicio de sesión
+            await Navigation.PopAsync();
+        }
+        else
+        {
+            MessageLabel.TextColor = Colors.Red;
+            MessageLabel.Text = result;
+            UsernameEntry.Text = "";
+            PasswordEntry.Text = "";
+        }
 
         // Rehabilitar el botón después de que se complete el procesamiento
         button.IsEnabled = true;
