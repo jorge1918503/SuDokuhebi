@@ -222,7 +222,7 @@ public partial class GamePage : ContentPage
         int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10);
 
         if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) score -= 300;
-        if (SessionManager.CurrentResult == "Derrota") score *= -1;
+        if (SessionManager.CurrentResult == "Derrota") score = 0;
 
         // Validar que CurrentDifficulty no sea nulo antes de llamar a ToString()
         string difficulty = SessionManager.CurrentDifficulty?.ToString() ?? "Error";
@@ -339,38 +339,63 @@ public partial class GamePage : ContentPage
     {
         int rows = cells.GetLength(0);
         int cols = cells.GetLength(1);
+
         int snakeRow, snakeCol;
-        // Encuentra la posicion de la serpiente
         snakePosition(rows, cols, out snakeRow, out snakeCol);
+
+        int playerRow, playerCol;
+        playerPosition(rows, cols, out playerRow, out playerCol);
 
         // Direcciones posibles (8 alrededor)
         List<(int dRow, int dCol)> directions = DireccionesPosibles();
 
-        // Mezclar direcciones para elegir una al azar
-        var rnd = new Random();
-        directions = directions.OrderBy(x => rnd.Next()).ToList();
+        Random rnd = new Random();
 
+        bool useSmartMove = rnd.NextDouble() < 0.45; // 45% de las veces elige la mejor dirección
+        if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) useSmartMove = rnd.NextDouble() < 0.1;
+
+        if (useSmartMove)
+        {
+            // Ordena por distancia al jugador (inteligente)
+            directions = directions
+                .OrderBy(dir =>
+                {
+                    int newRow = snakeRow + dir.dRow;
+                    int newCol = snakeCol + dir.dCol;
+
+                    if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || cells[newRow, newCol].SnakeIn)
+                        return int.MaxValue;
+
+                    int distance = Math.Abs(playerRow - newRow) + Math.Abs(playerCol - newCol);
+                    return distance;
+                }).ToList();
+        }
+        else
+        {
+            // Aleatorio total
+            directions = directions.OrderBy(x => rnd.Next()).ToList();
+        }
+
+        // Intentar moverse
         foreach (var (dRow, dCol) in directions)
         {
             int newRow = snakeRow + dRow;
             int newCol = snakeCol + dCol;
 
-            // Chequeamos que esté dentro del grid y que no haya ya una serpiente ahí
             if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols && !cells[newRow, newCol].SnakeIn)
             {
-                // Limpiamos la celda anterior
-                cells[snakeRow, snakeCol].SnakeHead = false; // deja de ser la cabeza
-                cells[snakeRow, snakeCol].SnakeIn = true; // es parte del cuerpo
-                buttons[snakeRow, snakeCol].Source = null; // quito la foto de la cabeza
-                buttons[snakeRow, snakeCol].BackgroundColor = Colors.darkSnakeGreen; // pongo el fondo verde simulando el cuerpo
+                // Limpiar celda anterior
+                cells[snakeRow, snakeCol].SnakeHead = false;
+                cells[snakeRow, snakeCol].SnakeIn = true;
+                buttons[snakeRow, snakeCol].Source = null;
+                buttons[snakeRow, snakeCol].BackgroundColor = Colors.darkSnakeGreen;
 
-                // Movemos la serpiente a la nueva celda
-                cells[newRow, newCol].SnakeHead = true; // la nueva celda pasa a ser la cabeza
-                buttons[newRow, newCol].Source = "serpiente.png"; // le pongo la foto de la cabeza
+                // Nueva cabeza
+                cells[newRow, newCol].SnakeHead = true;
+                buttons[newRow, newCol].Source = "serpiente.png";
                 break;
             }
         }
-
     }
 
     private void snakePosition(int rows, int cols, out int snakeRow, out int snakeCol)

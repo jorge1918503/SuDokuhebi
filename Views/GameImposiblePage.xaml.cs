@@ -1,4 +1,4 @@
-ï»¿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Maui.Views;
 using System;
 using Cell = SuDokuhebi.Utils.Cell;
 using SuDokuhebi.Views.Popups;
@@ -8,7 +8,7 @@ using SuDokuhebi.Utils;
 
 namespace SuDokuhebi.Views;
 
-public partial class GameShootPage : ContentPage
+public partial class GameImposiblePage : ContentPage
 {
     private ImageButton[,] buttons;
     private Cell[,] cells;
@@ -21,12 +21,12 @@ public partial class GameShootPage : ContentPage
 
     private readonly GameService _gameService;
 
-    public GameShootPage()
+    public GameImposiblePage()
     {
         InitializeComponent();
         _gameService = new GameService();
 
-        // tamaÃ±o del grid
+        // tamaño del grid
         gridSize = 9;
 
         buttons = new ImageButton[gridSize, gridSize];
@@ -69,7 +69,7 @@ public partial class GameShootPage : ContentPage
                 }
                 else
                 {
-                    purpleZone = random.NextDouble() < 0.45;
+                    purpleZone = random.NextDouble() < 0.5;
 
                 }
 
@@ -169,7 +169,7 @@ public partial class GameShootPage : ContentPage
                 var popup = new DefeatPopup(movements, _secondsElapsed);
                 var result = await this.ShowPopupAsync(popup);
 
-                // Solo despuÃ©s de que el popup se cierre, navega al menÃº
+                // Solo después de que el popup se cierre, navega al menú
                 if (result is bool ok && ok)
                 {
                     await Task.Delay(200);
@@ -192,7 +192,7 @@ public partial class GameShootPage : ContentPage
                     var popup = new DefeatPopup(movements, _secondsElapsed);
                     var result = await this.ShowPopupAsync(popup);
 
-                    // Solo despuÃ©s de que el popup se cierre, navega al menÃº
+                    // Solo después de que el popup se cierre, navega al menú
                     if (result is bool ok && ok)
                     {
                         await Task.Delay(200);
@@ -218,7 +218,7 @@ public partial class GameShootPage : ContentPage
             var popup = new VictoryPopup(movements, _secondsElapsed);
             var result = await this.ShowPopupAsync(popup);
 
-            // Solo despuÃ©s de que el popup se cierre, navega al menÃº
+            // Solo después de que el popup se cierre, navega al menú
             if (result is bool ok && ok)
             {
                 await Task.Delay(200);
@@ -234,7 +234,7 @@ public partial class GameShootPage : ContentPage
         _timer.Stop(); // Detiene el tiempo al ganar
 
         // Calcular score
-        int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10) + 300; // + bonus de dificultad
+        int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10) + 500; // + bonus de dificultad
 
         if (SessionManager.CurrentResult == "Derrota") score = 0;
 
@@ -250,7 +250,7 @@ public partial class GameShootPage : ContentPage
         int rows = cells.GetLength(0);
         int cols = cells.GetLength(1);
 
-        // Encontrar la posiciÃ³n actual del jugador
+        // Encontrar la posición actual del jugador
         int playerRow, playerCol;
         playerPosition(rows, cols, out playerRow, out playerCol);
 
@@ -268,13 +268,13 @@ public partial class GameShootPage : ContentPage
             int adjacentRow = snakeRow + dRow;
             int adjacentCol = snakeCol + dCol;
 
-            // Verificamos si la celda adyacente estÃ¡ dentro del grid
+            // Verificamos si la celda adyacente está dentro del grid
             if (adjacentRow >= 0 && adjacentRow < rows && adjacentCol >= 0 && adjacentCol < cols)
             {
                 // Si el jugador esta en alguna de las celdas adyacentes
                 if (adjacentRow == playerRow && adjacentCol == playerCol)
                 {
-                    return true; // El jugador estÃ¡ al lado de la cabeza de la serpiente
+                    return true; // El jugador está al lado de la cabeza de la serpiente
                 }
                 else if (snakeRow == playerRow && snakeCol == playerCol)
                 {
@@ -282,7 +282,7 @@ public partial class GameShootPage : ContentPage
                 }
             }
         }
-        // No estÃ¡ al lado
+        // No está al lado
         return false;
     }
 
@@ -386,7 +386,7 @@ public partial class GameShootPage : ContentPage
 
         Random rnd = new Random();
 
-        bool useSmartMove = rnd.NextDouble() < 0.5; // 70% de las veces elige la mejor direcciÃ³n
+        bool useSmartMove = rnd.NextDouble() < 0.75; // 70% de las veces elige la mejor dirección
 
         if (useSmartMove)
         {
@@ -436,7 +436,7 @@ public partial class GameShootPage : ContentPage
 
     private void snakePosition(int rows, int cols, out int snakeRow, out int snakeCol)
     {
-        // Encontrar la posiciÃ³n actual de la serpiente
+        // Encontrar la posición actual de la serpiente
         snakeRow = -1;
         snakeCol = -1;
         for (int i = 0; i < rows; i++)
@@ -477,7 +477,26 @@ public partial class GameShootPage : ContentPage
         MainThread.BeginInvokeOnMainThread(() =>
         {
             UpdateTimerLabel();
+            if (_secondsElapsed > 59) maxTimeReached();
         });
+    }
+
+    private async void maxTimeReached()
+    {
+        SessionManager.CurrentResult = "Derrota";
+        await saveGame();
+
+        // Mostrar popup y esperar a que se cierre
+        var popup = new DefeatPopup(movements, _secondsElapsed);
+        var result = await this.ShowPopupAsync(popup);
+
+        // Solo después de que el popup se cierre, navega al menú
+        if (result is bool ok && ok)
+        {
+            await Task.Delay(200);
+            SessionManager.ClearGame();
+            Application.Current.Windows[0].Page = new MenuTabbedPage();
+        }
     }
 
     private void UpdateTimerLabel()

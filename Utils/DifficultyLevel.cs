@@ -10,6 +10,7 @@ namespace SuDokuhebi.Utils
     {
         Fácil,
         Medio,
-        Difícil
+        Difícil,
+        Imposible
     }
 }

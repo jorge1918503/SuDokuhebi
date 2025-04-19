@@ -36,6 +36,13 @@ public partial class PlayPage : ContentPage
     {
         SessionManager.CurrentDifficulty = DifficultyLevel.Difícil;
         // Cambiar a una página sin tabs (por ejemplo, el juego)
-        Application.Current.MainPage = new NavigationPage(new GameShootPage()); // GamePage alterada para disparar (GameShootPage?)
+        Application.Current.MainPage = new NavigationPage(new GameShootPage()); // GamePage alterada para disparar
+    }
+
+    private async void OnImposibleClicked(object sender, EventArgs e)
+    {
+        SessionManager.CurrentDifficulty = DifficultyLevel.Imposible;
+        // Cambiar a una página sin tabs (por ejemplo, el juego)
+        Application.Current.MainPage = new NavigationPage(new GameImposiblePage());
     }
 }

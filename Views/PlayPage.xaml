@@ -1,48 +1,111 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
-            x:Class="SuDokuhebi.Views.PlayPage"  
-            Title="‎                             Jugar                           ‎ ">  
-   <VerticalStackLayout VerticalOptions="Fill"  
-                        HorizontalOptions="Center"  
-                        WidthRequest="800"  
-                        HeightRequest="600">
-       
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SuDokuhebi.Views.PlayPage"
+             Title="‎                             Jugar                           ‎ ">
+    <VerticalStackLayout VerticalOptions="Fill"
+                         HorizontalOptions="Center"
+                         WidthRequest="900"
+                         HeightRequest="600">
+
         <Image Source="logogpt.jpg"
                WidthRequest="200"
-               HeightRequest="200"/>
+               HeightRequest="200" />
 
-        <Label   
-           Text="Elige tu dificultad"
-           VerticalOptions="Center"   
-           HorizontalOptions="Center" />  
-       
-       <Grid HorizontalOptions="Center"
-             VerticalOptions="End"
-             ColumnDefinitions="200,200,200">  
-           <Button Grid.Column="0"  
-                   Text="Fácil"  
-                   Clicked="OnEasyClicked"  
-                   VerticalOptions="Center"  
-                   HorizontalOptions="Center"  
-                   Margin="10" 
-                   WidthRequest="150" />  
-           
-           <Button Grid.Column="1"  
-                   Text="Normal"  
-                   Clicked="OnPlayClicked"  
-                   VerticalOptions="Center"  
-                   HorizontalOptions="Center"  
-                   Margin="10"
-                   WidthRequest="150" />  
-           
-           <Button Grid.Column="2"  
-                   Text="Difícil"  
-                   Clicked="OnHardClicked"  
-                   VerticalOptions="Center"  
-                   HorizontalOptions="Center"  
-                   Margin="10"
-                   WidthRequest="150" />  
-       </Grid>  
-   </VerticalStackLayout>  
+        <Label Text="Elige tu dificultad"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
+
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="End"
+              ColumnDefinitions="210,210,210,210"
+              RowDefinitions="auto,auto,auto,auto">
+            
+            <Button Grid.Column="0"
+                    Grid.Row="0"
+                    Text="Fácil"
+                    Clicked="OnEasyClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="10"
+                    WidthRequest="150"
+                    BackgroundColor="#d77cd9"/>
+            
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Text="Una forma sencilla de comenzar"
+                   HorizontalTextAlignment="Center"/>
+
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Text="Un pequeño campo de batalla"
+                   HorizontalTextAlignment="Center" />
+
+            <Button Grid.Column="1"
+                    Grid.Row="0"
+                    Text="Normal"
+                    Clicked="OnPlayClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="10"
+                    WidthRequest="150"
+                    BackgroundColor="#d77cd9" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="1"
+                   Text="El juego clásico"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Grid.Row="2"
+                   Grid.Column="1"
+                   Text="Una experiencia predeterminada"
+                   HorizontalTextAlignment="Center" />
+
+            <Button Grid.Column="2"
+                    Grid.Row="0"
+                    Text="Difícil"
+                    Clicked="OnHardClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="10"
+                    WidthRequest="150"
+                    BackgroundColor="#d77cd9" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="2"
+                   Text="¿Cómo llevas la puntería?"
+                   HorizontalTextAlignment="Center" />
+            
+            <Label Grid.Row="2"
+                   Grid.Column="2"
+                   Text="No te acerques demasiado y dispara!!"
+                   HorizontalTextAlignment="Center" />
+            
+            <Button Grid.Column="3"
+                    Grid.Row="0"
+                    Text="Imposible"
+                    Clicked="OnImposibleClicked"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Margin="10"
+                    WidthRequest="150"
+                    BackgroundColor="#d77cd9" />
+
+            <Label Grid.Row="1"
+                   Grid.Column="3"
+                   Text="El reto imposible"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Grid.Row="2"
+                   Grid.Column="3"
+                   Text="No te quedes sin tiempo"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Grid.Row="3"
+                   Grid.Column="3"
+                   Text="Dispara y sobretodo huye!!"
+                   HorizontalTextAlignment="Center" />
+
+        </Grid>
+    </VerticalStackLayout>
 </ContentPage>
