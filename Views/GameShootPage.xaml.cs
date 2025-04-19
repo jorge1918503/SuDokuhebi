@@ -8,12 +8,12 @@ using SuDokuhebi.Utils;
 
 namespace SuDokuhebi.Views;
 
-public partial class GamePage : ContentPage
+public partial class GameShootPage : ContentPage
 {
     private ImageButton[,] buttons;
     private Cell[,] cells;
 
-    private int gridSize; // ← NUEVA variable para manejar tamaño dinámico
+    private int gridSize;
 
     private System.Timers.Timer _timer;
     private int _secondsElapsed;
@@ -21,14 +21,13 @@ public partial class GamePage : ContentPage
 
     private readonly GameService _gameService;
 
-    public GamePage()
+    public GameShootPage()
     {
         InitializeComponent();
         _gameService = new GameService();
 
-        // Detectar el tamaño del grid
-        if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) gridSize = 6;
-        else gridSize = 9;
+        // tamaño del grid
+        gridSize = 9;
 
         buttons = new ImageButton[gridSize, gridSize];
         cells = new Cell[gridSize, gridSize];
@@ -70,12 +69,8 @@ public partial class GamePage : ContentPage
                 }
                 else
                 {
-                    if (SessionManager.CurrentDifficulty == DifficultyLevel.Medio)
-                        purpleZone = random.NextDouble() < 0.45;
-                    else if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil)
-                        purpleZone = random.NextDouble() < 0.3;
-                    else
-                        purpleZone = random.NextDouble() < 1;
+                    purpleZone = random.NextDouble() < 0.45;
+
                 }
 
                 cells[i, j] = new Cell(purpleZone, i, j);
@@ -112,7 +107,7 @@ public partial class GamePage : ContentPage
                     BorderWidth = 1,
                     CornerRadius = 5,
                     Padding = 5,
-                    Source = cells[row, col].PlayerIn ? "personaje.png" :
+                    Source = cells[row, col].PlayerIn ? "personajehard.png" :
                              cells[row, col].SnakeHead ? "serpiente.png" : null,
                     Aspect = Aspect.AspectFit
                 };
@@ -157,21 +152,24 @@ public partial class GamePage : ContentPage
             }
 
             // cambia la posicion del personaje y actualiza los posibles movimientos
-            button.Source = "personaje.png";
+            button.Source = "personajehard.png";
             cells[row, col].PlayerIn = true;
             possibleMovement();
 
             movements++;
             UpdateMovementsLabel();
 
-            // comprobacion de victoria
+
+            // movimiento de la serpiente
+            snakeMovement();
+            // si pierde
             if (checkWinLost())
             {
-                SessionManager.CurrentResult = "Victoria";
+                SessionManager.CurrentResult = "Derrota";
                 await saveGame();
 
                 // Mostrar popup y esperar a que se cierre
-                var popup = new VictoryPopup(movements, _secondsElapsed);
+                var popup = new DefeatPopup(movements, _secondsElapsed);
                 var result = await this.ShowPopupAsync(popup);
 
                 // Solo después de que el popup se cierre, navega al menú
@@ -183,32 +181,26 @@ public partial class GamePage : ContentPage
                 }
 
             }
-            else
+
+
+        }
+        else if(button.BackgroundColor == Colors.yellowSnakeEye && cells[row,col].SnakeHead)
+        {
+            // sonido latigazo
+
+            SessionManager.CurrentResult = "Victoria";
+            await saveGame();
+
+            // Mostrar popup y esperar a que se cierre
+            var popup = new VictoryPopup(movements, _secondsElapsed);
+            var result = await this.ShowPopupAsync(popup);
+
+            // Solo después de que el popup se cierre, navega al menú
+            if (result is bool ok && ok)
             {
-                await Task.Delay(200); // Espera para mostrar el movimiento
-
-                // movimiento de la serpiente
-                snakeMovement();
-                // si pierde
-                if (checkWinLost())
-                {
-                    SessionManager.CurrentResult = "Derrota";
-                    await saveGame();
-
-                    // Mostrar popup y esperar a que se cierre
-                    var popup = new DefeatPopup(movements, _secondsElapsed);
-                    var result = await this.ShowPopupAsync(popup);
-
-                    // Solo después de que el popup se cierre, navega al menú
-                    if (result is bool ok && ok)
-                    {
-                        await Task.Delay(200);
-                        SessionManager.ClearGame();
-                        Application.Current.Windows[0].Page = new MenuTabbedPage();
-                    }
-
-                }
-
+                await Task.Delay(200);
+                SessionManager.ClearGame();
+                Application.Current.Windows[0].Page = new MenuTabbedPage();
             }
         }
 
@@ -219,9 +211,8 @@ public partial class GamePage : ContentPage
         _timer.Stop(); // Detiene el tiempo al ganar
 
         // Calcular score
-        int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10);
+        int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10) + 300; // + bonus de dificultad
 
-        if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) score -= 300;
         if (SessionManager.CurrentResult == "Derrota") score *= -1;
 
         // Validar que CurrentDifficulty no sea nulo antes de llamar a ToString()
@@ -303,7 +294,7 @@ public partial class GamePage : ContentPage
 
     private bool possibleMovement()
     {
-        foreach (ImageButton button in buttons) if (button.BackgroundColor == Colors.LightGreen) button.BackgroundColor = Colors.white;
+        foreach (ImageButton button in buttons) if (button.BackgroundColor == Colors.LightGreen || button.BackgroundColor == Colors.yellowSnakeEye) button.BackgroundColor = Colors.white;
 
         for (int i = 0; i < gridSize; i++)
         {
@@ -311,14 +302,23 @@ public partial class GamePage : ContentPage
             {
                 if (cells[i, j].PlayerIn)
                 {
-                    updateCellColor(i - 1, j - 1);
-                    updateCellColor(i - 1, j);
-                    updateCellColor(i - 1, j + 1);
-                    updateCellColor(i, j + 1);
-                    updateCellColor(i + 1, j + 1);
-                    updateCellColor(i + 1, j);
-                    updateCellColor(i + 1, j - 1);
-                    updateCellColor(i, j - 1);
+                    movementCellColor(i - 1, j - 1);
+                    movementCellColor(i - 1, j);
+                    movementCellColor(i - 1, j + 1);
+                    movementCellColor(i, j + 1);
+                    movementCellColor(i + 1, j + 1);
+                    movementCellColor(i + 1, j);
+                    movementCellColor(i + 1, j - 1);
+                    movementCellColor(i, j - 1);
+
+                    shootCellColor(i - 1, j - 2); // disparos izquierda
+                    shootCellColor(i + 1, j - 2);
+                    shootCellColor(i - 2, j - 1); // disparos arriba
+                    shootCellColor(i - 2, j + 1);
+                    shootCellColor(i - 1, j + 2); // disparos derecha
+                    shootCellColor(i + 1, j + 2);
+                    shootCellColor(i + 2, j - 1); // disparos abajo 
+                    shootCellColor(i + 2, j + 1);
                     break;
                 }
             }
@@ -327,11 +327,19 @@ public partial class GamePage : ContentPage
         return false;
     }
 
-    private void updateCellColor(int i, int j)
+    private void movementCellColor(int i, int j)
     {
         if (i >= 0 && i < gridSize && j >= 0 && j < gridSize)
         {
             if (buttons[i, j].BackgroundColor == Colors.white) buttons[i, j].BackgroundColor = Colors.LightGreen;
+        }
+    }
+
+    private void shootCellColor(int i, int j)
+    {
+        if (i >= 0 && i < gridSize && j >= 0 && j < gridSize)
+        {
+            if (buttons[i, j].BackgroundColor == Colors.white) buttons[i, j].BackgroundColor = Colors.yellowSnakeEye;
         }
     }
 

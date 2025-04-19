@@ -54,6 +54,9 @@ namespace SuDokuhebi.Services
             if (player == null)
                 return false;
 
+            // Guardar el nombre de usuario y el ID del jugador en la sesión
+            SessionManager.SetSession(player.name, player.id_player);
+
             return PasswordHasher.VerifyPassword(password, player.password);
         }
     }
