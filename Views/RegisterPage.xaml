@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SuDokuhebi.Views.RegisterPage"
-             Title="RegisterPage">
-    <VerticalStackLayout Padding="20">
-        <Label Text="Usuario" FontSize="20"/>
-        <Entry x:Name="UsernameEntry" Placeholder="Ingrese su usuario"/>
+             x:Class="SuDokuhebi.Views.RegisterPage">
+    <VerticalStackLayout Spacing="20"
+                         WidthRequest="500"
+                         VerticalOptions="Center">
+        <Entry x:Name="UsernameEntry"
+               Placeholder="Usuario" />
+        <Entry x:Name="PasswordEntry"
+               Placeholder="Contraseña"
+               IsPassword="True"
+               Completed="OnPasswordEntryCompleted" />
 
-        <Label Text="Contraseña" FontSize="20"/>
-        <Entry x:Name="PasswordEntry" Placeholder="Ingrese su contraseña" IsPassword="True"/>
+        <Button Text="Registrar"
+                FontAttributes="Bold"
+                x:Name="RegisterButton"
+                Clicked="OnRegisterClicked"
+                WidthRequest="400" />
 
-        <Button Text="Registrar" Clicked="OnRegisterClicked" Margin="10"/>
-        <Button Text="Cancelar" Clicked="OnCancelClicked" Margin="10"/>
-        <Label x:Name="MessageLabel" TextColor="Red"/>
+        <Button Text="Cancel"
+                FontAttributes="Bold"
+                Clicked="OnCancelClicked"
+                WidthRequest="400" />
+
+        <Label x:Name="MessageLabel"
+               TextColor="Red"
+               HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

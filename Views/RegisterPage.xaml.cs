@@ -50,6 +50,10 @@ public partial class RegisterPage : ContentPage
         await Navigation.PopAsync();
     }
 
-
+    // para hacer el loginButton dandole al Intro
+    private void OnPasswordEntryCompleted(object sender, EventArgs e)
+    {
+        OnRegisterClicked(RegisterButton, EventArgs.Empty);
+    }
 
 }

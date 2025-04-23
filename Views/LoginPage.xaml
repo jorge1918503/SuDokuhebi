@@ -3,11 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SuDokuhebi.Views.LoginPage"
              Title="LoginPage">
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <Entry x:Name="usernameEntry" Placeholder="Usuario" />
-        <Entry x:Name="passwordEntry" Placeholder="Contraseña" IsPassword="True" Completed="OnPasswordEntryCompleted"/>
-        <Button Text="Iniciar Sesión" Clicked="OnLoginClicked"/>
-        <Button x:Name="loginButton" Text="Registrate" Clicked="OnRegisterClicked"/>
-        <Label x:Name="messageLabel" TextColor="Red"/>
+    <VerticalStackLayout Spacing="20"
+                         WidthRequest="500"
+                         VerticalOptions="Center">
+        <Entry x:Name="usernameEntry"
+               Placeholder="Usuario" />
+        <Entry x:Name="passwordEntry"
+               Placeholder="Contraseña"
+               IsPassword="True"
+               Completed="OnPasswordEntryCompleted" />
+
+        <Button Text="Iniciar Sesión"
+                FontAttributes="Bold"
+                x:Name="loginButton"
+                Clicked="OnLoginClicked"
+                WidthRequest="400" />
+
+        <Button Text="Registrate"
+                FontAttributes="Bold"
+                Clicked="OnRegisterClicked"
+                WidthRequest="400" />
+
+        <Label x:Name="messageLabel"
+               TextColor="Red" 
+               HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>
