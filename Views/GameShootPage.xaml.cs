@@ -5,6 +5,7 @@ using SuDokuhebi.Views.Popups;
 using Colors = SuDokuhebi.Utils.Colors;
 using SuDokuhebi.Services;
 using SuDokuhebi.Utils;
+using Plugin.Maui.Audio;
 
 namespace SuDokuhebi.Views;
 
@@ -21,9 +22,12 @@ public partial class GameShootPage : ContentPage
 
     private readonly GameService _gameService;
 
+    private readonly IAudioManager _audioManager;
+
     public GameShootPage()
     {
         InitializeComponent();
+        _audioManager = AudioManager.Current;
         _gameService = new GameService();
 
         // tamaño del grid
@@ -129,10 +133,18 @@ public partial class GameShootPage : ContentPage
     {
         var button = sender as ImageButton;
 
-        if (cells[row, col].PurpleZone)
+        if (button.BackgroundColor == Colors.purple)
         {
             button.BackgroundColor = Colors.lightPurple;
             // sonido de acido
+            if (_soundEnabled)
+            {
+                var audioStream = await FileSystem.OpenAppPackageFileAsync("acid.mp3");
+                var player = _audioManager.CreatePlayer(audioStream);
+                player.Loop = false;
+                player.Play();
+            }
+            
             await Task.Delay(500);
             button.BackgroundColor = Colors.purple;
         }
@@ -154,6 +166,29 @@ public partial class GameShootPage : ContentPage
             // cambia la posicion del personaje y actualiza los posibles movimientos
             button.Source = "personajehard.png";
             cells[row, col].PlayerIn = true;
+
+            // posibilidad de gruñido
+            if (_soundEnabled)
+            {
+                var random = new Random();
+                double posibility = random.NextDouble();
+                if (posibility <= 0.2) // 30% de probabilidad
+                {
+                    var audioStream = await FileSystem.OpenAppPackageFileAsync("barbaro.mp3");
+                    var player = _audioManager.CreatePlayer(audioStream);
+                    player.Loop = false;
+                    player.Play();
+                }
+                else if (posibility > 0.2 && posibility <= 0.4)
+                {
+                    var audioStream = await FileSystem.OpenAppPackageFileAsync("cansado.mp3");
+                    var player = _audioManager.CreatePlayer(audioStream);
+                    player.Loop = false;
+                    player.Play();
+                }
+            }
+            
+
             possibleMovement();
 
             movements++;
@@ -166,7 +201,7 @@ public partial class GameShootPage : ContentPage
                 await saveGame();
 
                 // Mostrar popup y esperar a que se cierre
-                var popup = new DefeatPopup(movements, _secondsElapsed);
+                var popup = new DefeatPopup(movements, _secondsElapsed, _soundEnabled);
                 var result = await this.ShowPopupAsync(popup);
 
                 // Solo después de que el popup se cierre, navega al menú
@@ -182,6 +217,27 @@ public partial class GameShootPage : ContentPage
             {
                 // movimiento de la serpiente
                 snakeMovement();
+                // posibilidad de silbido
+                if (_soundEnabled)
+                {
+                    var randomSnake = new Random();
+                    double posibilitySnake = randomSnake.NextDouble();
+                    if (posibilitySnake <= 0.2) // 30% de probabilidad
+                    {
+                        var audioStream = await FileSystem.OpenAppPackageFileAsync("snakehissing.mp3");
+                        var player = _audioManager.CreatePlayer(audioStream);
+                        player.Loop = false;
+                        player.Play();
+                    }
+                    else if (posibilitySnake > 0.2 && posibilitySnake <= 0.4)
+                    {
+                        var audioStream = await FileSystem.OpenAppPackageFileAsync("cascabeleo.mp3");
+                        var player = _audioManager.CreatePlayer(audioStream);
+                        player.Loop = false;
+                        player.Play();
+                    }
+                }
+                
                 // si pierde
                 if (checkWinLost())
                 {
@@ -189,7 +245,7 @@ public partial class GameShootPage : ContentPage
                     await saveGame();
 
                     // Mostrar popup y esperar a que se cierre
-                    var popup = new DefeatPopup(movements, _secondsElapsed);
+                    var popup = new DefeatPopup(movements, _secondsElapsed, _soundEnabled);
                     var result = await this.ShowPopupAsync(popup);
 
                     // Solo después de que el popup se cierre, navega al menú
@@ -209,13 +265,12 @@ public partial class GameShootPage : ContentPage
         }
         else if (button.BackgroundColor == Colors.yellowSnakeEye && cells[row, col].SnakeHead)
         {
-            // sonido latigazo
 
             SessionManager.CurrentResult = "Victoria";
             await saveGame();
 
             // Mostrar popup y esperar a que se cierre
-            var popup = new VictoryPopup(movements, _secondsElapsed);
+            var popup = new VictoryPopup(movements, _secondsElapsed, _soundEnabled);
             var result = await this.ShowPopupAsync(popup);
 
             // Solo después de que el popup se cierre, navega al menú
@@ -495,5 +550,17 @@ public partial class GameShootPage : ContentPage
     private void UpdateMovementsLabel()
     {
         Movements.Text = $"Movimientos: {movements}";
+    }
+
+    private bool _soundEnabled = true;
+
+    private void OnSoundIconTapped(object sender, EventArgs e)
+    {
+        _soundEnabled = !_soundEnabled;
+        SoundIcon.Source = _soundEnabled ? "soundon.png" : "soundoff.png";
+
+        // Opcional: Pequeña animación al tocar
+        SoundIcon.ScaleTo(1.2, 100);
+        SoundIcon.ScaleTo(1.0, 100);
     }
 }

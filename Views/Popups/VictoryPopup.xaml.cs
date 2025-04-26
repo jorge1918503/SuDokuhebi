@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using Plugin.Maui.Audio;
+using SuDokuhebi.Utils;
 using System.Threading.Tasks;
 
 namespace SuDokuhebi.Views.Popups;
@@ -8,12 +9,16 @@ public partial class VictoryPopup : Popup
 {
     private readonly IAudioManager _audioManager;
 
-    public VictoryPopup(int movements, int timeElapsed)
+    public VictoryPopup(int movements, int timeElapsed, bool _soundEnabled)
     {
         InitializeComponent();
 
         _audioManager = AudioManager.Current;
-        PlayVictorySound();
+        if (_soundEnabled)
+        {
+            PlayKillSound();
+            PlayVictorySound();
+        }
 
         MovementsLabel.Text = $"Movimientos: {movements}";
 
@@ -28,12 +33,31 @@ public partial class VictoryPopup : Popup
         
     }
 
+    private async void PlayKillSound()
+    {
+        if (SessionManager.CurrentDifficulty == DifficultyLevel.Difícil || SessionManager.CurrentDifficulty == DifficultyLevel.Imposible)
+        {
+            var audioStream = await FileSystem.OpenAppPackageFileAsync("tirachinas.mp3");
+            var player = _audioManager.CreatePlayer(audioStream);
+            player.Loop = false;
+            player.Play();
+        }
+        else
+        {
+            var audioStream = await FileSystem.OpenAppPackageFileAsync("blade.mp3");
+            var player = _audioManager.CreatePlayer(audioStream);
+            player.Loop = false;
+            player.Play();
+        }
+    }
+
     private async void PlayVictorySound()
     {
-        // Fix: Use the correct method from IAudioManager to create a player
+        await Task.Delay(700);
         var audioStream = await FileSystem.OpenAppPackageFileAsync("victory.mp3");
         var player = _audioManager.CreatePlayer(audioStream);
         player.Loop = false;
         player.Play();
     }
+
 }

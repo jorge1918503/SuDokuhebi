@@ -20,6 +20,18 @@
                    HorizontalOptions="End"
                    VerticalOptions="Center" />
 
+            <!-- Icono Toggle de Sonido -->
+            <Image x:Name="SoundIcon"
+                   Source="soundon.png"
+                   WidthRequest="30"
+                   HeightRequest="30"
+                   Margin="10"
+                   HorizontalOptions="End">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSoundIconTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+
         </HorizontalStackLayout>
 
         <Grid x:Name="GameGrid"

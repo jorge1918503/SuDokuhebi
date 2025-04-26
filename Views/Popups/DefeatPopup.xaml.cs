@@ -7,12 +7,16 @@ public partial class DefeatPopup : Popup
 {
     private readonly IAudioManager _audioManager;
 
-    public DefeatPopup(int movements, int timeElapsed)
+    public DefeatPopup(int movements, int timeElapsed, bool _soundEnabled)
     {
         InitializeComponent();
 
         _audioManager = AudioManager.Current;
-        PlayDefeatSound();
+        if (_soundEnabled)
+        {
+            PlayDefeatSound();
+        }
+        
 
         MovementsLabel.Text = $"Movimientos: {movements}";
 
@@ -29,7 +33,7 @@ public partial class DefeatPopup : Popup
     private async void PlayDefeatSound()
     {
         // Fix: Use the correct method from IAudioManager to create a player
-        var audioStream = await FileSystem.OpenAppPackageFileAsync("victory.mp3");
+        var audioStream = await FileSystem.OpenAppPackageFileAsync("snakebite.mp3");
         var player = _audioManager.CreatePlayer(audioStream);
         player.Loop = false;
         player.Play();
