@@ -2,20 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SuDokuhebi.Views.WelcomePage"
-              >
-    <VerticalStackLayout>
+             >
+    <VerticalStackLayout HorizontalOptions="Center"
+                         WidthRequest="700"
+                         Spacing="30">
         <!--Logo-->
-        <Image />
+        <Image Source="logogpt.png"
+               WidthRequest="350"/>
         
         <!--Bienvenido-->
-        <Label />
+        <Label Text="Bienvenido guerrero"
+               FontSize="25"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"/>
 
         <!--Reglas-->
-        <Label />
-        <Label />
-        
+        <Label Text="Avanza por el tablero mientras la serpiente te busca"
+               FontSize="20"
+               HorizontalTextAlignment="Center"/>
+        <Label Text="Evita las zonas venenosas"
+               FontSize="20"
+               HorizontalTextAlignment="Center" />
+        <Label Text="Prueba los diferentes modos de juego"
+               FontSize="20"
+               HorizontalTextAlignment="Center" />
+
         <!--Pulsar para entrar-->
-        <Button />
+        <Button Text="A la batalla!!"
+                WidthRequest="200"
+                FontSize="18"
+                FontAttributes="Bold"
+                BackgroundColor="#d77cd9"
+                TextColor="#000"
+                CornerRadius="12"
+                Padding="10"
+                Clicked="OnEnterClicked"
+                HorizontalOptions="Center" />
 
     </VerticalStackLayout>
 </ContentPage>

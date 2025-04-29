@@ -43,10 +43,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\logogpt.jpg" ForegroundFile="Resources\AppIcon\logogpt.jpg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\logogpt.png"/>
 
 		<!-- Splash Screen -->
-		<MauiSplasScreen Include="Resourcer\Splash\logogpt.jpg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplasScreen Include="Resourcer\Splash\logogpt.png" Color="#512BD4" BaseSize="128,128" />
 		
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

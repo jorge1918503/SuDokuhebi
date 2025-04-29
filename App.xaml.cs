@@ -8,7 +8,7 @@ namespace SuDokuhebi
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new LoginPage());
+            MainPage = new NavigationPage(new WelcomePage());
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
