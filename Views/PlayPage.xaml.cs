@@ -16,6 +16,7 @@ public partial class PlayPage : ContentPage
         {
             Application.Current.MainPage = currentTabbed;
         }
+
     }
 
     private async void OnEasyClicked(object sender, EventArgs e)

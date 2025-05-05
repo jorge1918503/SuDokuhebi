@@ -21,14 +21,14 @@ namespace SuDokuhebi.Services
 
         public async Task<string> RegisterPlayer(string username, string password)
         {
-            // Validar que los campos no estén vacíos
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-                return "Usuario y contraseña son obligatorios";
-
             // Validar que el usuario no exista ya en la base de datos
             var existingPlayer = await _context.Players.FirstOrDefaultAsync(p => p.name == username);
             if (existingPlayer != null)
                 return "El jugador ya existe";
+
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                return "Usuario y contraseña son obligatorios";
 
             // Hashear contraseña
             string hashedPassword = PasswordHasher.HashPassword(password);

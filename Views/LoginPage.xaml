@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SuDokuhebi.Views.LoginPage"
-             Title="LoginPage">
+             x:Class="SuDokuhebi.Views.LoginPage">
+
     <VerticalStackLayout Spacing="20"
                          WidthRequest="500"
                          VerticalOptions="Center">
+        
+        <Image Source="serpiente.png"
+               WidthRequest="200"
+               HeightRequest="200" />
+        
         <Entry x:Name="usernameEntry"
-               Placeholder="Usuario" />
+               Placeholder="Usuario" 
+               PlaceholderColor="White"/>
         <Entry x:Name="passwordEntry"
                Placeholder="Contraseña"
+               PlaceholderColor="White"
                IsPassword="True"
                Completed="OnPasswordEntryCompleted" />
 
         <Button Text="Iniciar Sesión"
+                TextColor="Black"
                 FontAttributes="Bold"
                 x:Name="loginButton"
                 Clicked="OnLoginClicked"
-                WidthRequest="400" />
+                WidthRequest="400"
+                BackgroundColor="#d77cd9" />
 
         <Button Text="Registrate"
+                TextColor="Black"
                 FontAttributes="Bold"
                 Clicked="OnRegisterClicked"
-                WidthRequest="400" />
+                WidthRequest="400"
+                BackgroundColor="#d77cd9" />
 
         <Label x:Name="messageLabel"
                TextColor="Red" 

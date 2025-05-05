@@ -5,23 +5,34 @@
     <VerticalStackLayout Spacing="20"
                          WidthRequest="500"
                          VerticalOptions="Center">
+
+        <Image Source="personajetrans.png"
+               WidthRequest="200"
+               HeightRequest="200" />
+
         <Entry x:Name="UsernameEntry"
-               Placeholder="Usuario" />
+               Placeholder="Usuario"
+               PlaceholderColor="White"/>
         <Entry x:Name="PasswordEntry"
                Placeholder="Contraseña"
+               PlaceholderColor="White"
                IsPassword="True"
                Completed="OnPasswordEntryCompleted" />
 
         <Button Text="Registrar"
+                TextColor="Black"
                 FontAttributes="Bold"
                 x:Name="RegisterButton"
                 Clicked="OnRegisterClicked"
-                WidthRequest="400" />
+                WidthRequest="400"
+                BackgroundColor="#d77cd9" />
 
-        <Button Text="Cancel"
+        <Button Text="Cancelar"
+                TextColor="Black"
                 FontAttributes="Bold"
                 Clicked="OnCancelClicked"
-                WidthRequest="400" />
+                WidthRequest="400"
+                BackgroundColor="#d77cd9"/>
 
         <Label x:Name="MessageLabel"
                TextColor="Red"

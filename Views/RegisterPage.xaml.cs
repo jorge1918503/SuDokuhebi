@@ -29,7 +29,7 @@ public partial class RegisterPage : ContentPage
             MessageLabel.Text = result;
             UsernameEntry.Text = "";
             PasswordEntry.Text = "";
-            Task.Delay(1000).Wait(); // Esperar 1 segundo para mostrar el mensaje
+            Task.Delay(3000).Wait(); // Esperar 1 segundo para mostrar el mensaje
             // Redirigir a la pantalla de inicio de sesión
             await Navigation.PopAsync();
         }
@@ -47,6 +47,8 @@ public partial class RegisterPage : ContentPage
 
     private async void OnCancelClicked(object sender, EventArgs e)
     {
+        UsernameEntry.Text = "";
+        PasswordEntry.Text = "";
         await Navigation.PopAsync();
     }
 

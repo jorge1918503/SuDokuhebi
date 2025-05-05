@@ -14,7 +14,7 @@ public partial class WelcomePage : ContentPage
         if (Application.Current?.Windows?.Count > 0)
         {
             // Cambia la pagina principal al LoginPage para no poder volver atrás
-            Application.Current.Windows[0].Page = new LoginPage();
+            Application.Current.Windows[0].Page = new NavigationPage(new LoginPage());
         }
     }
 }

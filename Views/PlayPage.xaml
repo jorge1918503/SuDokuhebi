@@ -6,20 +6,26 @@
     <VerticalStackLayout VerticalOptions="Fill"
                          HorizontalOptions="Center"
                          WidthRequest="900"
-                         HeightRequest="600">
-
-        <Image Source="logogpt.jpg"
-               WidthRequest="200"
-               HeightRequest="200" />
-
+                         HeightRequest="600"
+                         Padding="-5">
+        
         <Label Text="Elige tu dificultad"
+               TextColor="White"
+               FontAttributes="Bold"
+               FontSize="24"
                VerticalOptions="Center"
                HorizontalOptions="Center" />
 
+        <Image Source="partidablur.png"
+               WidthRequest="500"
+               HeightRequest="400"
+               Margin="10"/>
+
+        
+
         <Grid HorizontalOptions="Center"
-              VerticalOptions="End"
-              ColumnDefinitions="210,210,210,210"
-              RowDefinitions="auto,auto,auto,auto">
+              ColumnDefinitions="220,215,220,220"
+              RowDefinitions="auto,25,40,auto">
             
             <Button Grid.Column="0"
                     Grid.Row="0"

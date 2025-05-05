@@ -8,7 +8,7 @@
             SelectedTabColor="#b83dba"
             UnselectedTabColor="#d77cd9">
 
-    <local:PlayPage />
+    <local:PlayPage/>
     <local:RankingPage />
     <local:HistoryPage />
 
