@@ -43,7 +43,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\logogpt.png"/>
+		
 
 		<!-- Splash Screen -->
 		<MauiSplasScreen Include="Resourcer\Splash\logogpt.png" Color="#512BD4" BaseSize="128,128" />

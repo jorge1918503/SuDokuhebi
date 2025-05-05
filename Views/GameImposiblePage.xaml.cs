@@ -440,7 +440,7 @@ public partial class GameImposiblePage : ContentPage
 
         Random rnd = new Random();
 
-        bool useSmartMove = rnd.NextDouble() < 0.75; // 70% de las veces elige la mejor dirección
+        bool useSmartMove = rnd.NextDouble() < 0.75; // 75% de las veces elige la mejor dirección
 
         if (useSmartMove)
         {
@@ -460,7 +460,7 @@ public partial class GameImposiblePage : ContentPage
         }
         else
         {
-            // Aleatorio total (30% de las veces)
+            // Aleatorio total (25% de las veces)
             directions = directions.OrderBy(x => rnd.Next()).ToList();
         }
 

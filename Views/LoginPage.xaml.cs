@@ -61,7 +61,7 @@ public partial class LoginPage : ContentPage
 
     private async void OnRegisterClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new RegisterPage());
+        await Navigation.PushAsync(new NavigationPage(new RegisterPage()));
     }
 
     // para hacer el loginButton dandole al Intro
