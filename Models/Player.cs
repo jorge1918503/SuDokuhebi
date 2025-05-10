@@ -23,5 +23,6 @@ namespace SuDokuhebi.Models
         [Required]
         [MaxLength(50)]
         public int highestScore { get; set; }
+
     }
 }

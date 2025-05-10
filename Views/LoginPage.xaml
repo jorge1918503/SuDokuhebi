@@ -6,7 +6,7 @@
     <VerticalStackLayout Spacing="20"
                          WidthRequest="500"
                          VerticalOptions="Center">
-        
+       
         <Image Source="serpiente.png"
                WidthRequest="200"
                HeightRequest="200" />

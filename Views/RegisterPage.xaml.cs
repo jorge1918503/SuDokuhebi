@@ -26,10 +26,10 @@ public partial class RegisterPage : ContentPage
         if (result == "Jugador registrado correctamente")
         {
             MessageLabel.TextColor = Colors.Green;
-            MessageLabel.Text = result;
             UsernameEntry.Text = "";
             PasswordEntry.Text = "";
-            Task.Delay(3000).Wait(); // Esperar 1 segundo para mostrar el mensaje
+            MessageLabel.Text = "";
+            await DisplayAlert("", result, "OK");
             // Redirigir a la pantalla de inicio de sesión
             await Navigation.PopAsync();
         }

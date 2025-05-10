@@ -20,6 +20,7 @@ public partial class GameImposiblePage : ContentPage
     private int _secondsElapsed;
     private int movements;
 
+    private readonly PlayerService _playerService;
     private readonly GameService _gameService;
 
     private readonly IAudioManager _audioManager;
@@ -28,6 +29,7 @@ public partial class GameImposiblePage : ContentPage
     {
         InitializeComponent();
         _gameService = new GameService();
+        _playerService = new PlayerService();
         _audioManager = AudioManager.Current;
 
         // tamaño del grid
@@ -297,6 +299,15 @@ public partial class GameImposiblePage : ContentPage
 
         // Guardar partida en la base de datos
         await _gameService.SaveGame(SessionManager.CurrentUserId, difficulty, SessionManager.CurrentResult, TimeSpan.FromSeconds(_secondsElapsed), movements, score);
+
+        // actualizar highest score
+        var player = await _playerService.GetPlayerByIdAsync(SessionManager.CurrentUserId);  // obtener jugador actual
+
+        if (player != null && score > player.highestScore) // si el score es mayor al anterior
+        {
+            player.highestScore = score;
+            await _playerService.UpdatePlayerAsync(player);
+        }
     }
 
     private bool checkWinLost()
@@ -520,18 +531,18 @@ public partial class GameImposiblePage : ContentPage
 
     private void StartTimer()
     {
-        _secondsElapsed = 0;
+        _secondsElapsed = 60;
         UpdateTimerLabel();
         _timer.Start();
     }
 
     private void UpdateTimer()
     {
-        _secondsElapsed++;
+        _secondsElapsed--;
         MainThread.BeginInvokeOnMainThread(() =>
         {
             UpdateTimerLabel();
-            if (_secondsElapsed > 59) maxTimeReached();
+            if (_secondsElapsed == 0) maxTimeReached();
         });
     }
 
@@ -541,7 +552,7 @@ public partial class GameImposiblePage : ContentPage
         await saveGame();
 
         // Mostrar popup y esperar a que se cierre
-        var popup = new DefeatPopup(movements, _secondsElapsed, _soundEnabled);
+        var popup = new DefeatPopup(movements, 60, _soundEnabled);
         var result = await this.ShowPopupAsync(popup);
 
         // Solo después de que el popup se cierre, navega al menú
@@ -555,6 +566,7 @@ public partial class GameImposiblePage : ContentPage
 
     private void UpdateTimerLabel()
     {
+        if (_secondsElapsed < 10) TimerLabel.TextColor = Colors.red;
         TimeSpan time = TimeSpan.FromSeconds(_secondsElapsed);
         TimerLabel.Text = $"Tiempo: {time:mm\\:ss}";
     }

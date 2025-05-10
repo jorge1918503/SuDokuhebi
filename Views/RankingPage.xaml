@@ -3,21 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SuDokuhebi.Views.RankingPage"
              Title="‎‎ ‎ ‎ ‎ ‎ ‎                        Ranking                         ‎ ‎ ‎ ‎ ‎ ‎‎">
-    <VerticalStackLayout>
-        <Label 
-            Text="Soy la Ranking Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="Ranking"
-            FontSize="24"
-            HorizontalOptions="Center" />
-        <ListView x:Name="RankingListView">
-            <ListView.ItemTemplate>
+    <Grid RowDefinitions="Auto,600"
+          Padding="10">
+        <Label Text="Ranking de Jugadores"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,20"
+               Grid.Row="0" />
+
+        <CollectionView ItemsSource="{Binding DisplayPlayers}"
+                        Grid.Row="1"
+                        Margin="10,0">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Name}" Detail="{Binding Score}" />
+                    <Border StrokeShape="RoundRectangle 15"
+                            BackgroundColor="#d77cd9"
+                            Margin="10"
+                            Padding="10"
+                            WidthRequest="500"
+                            HeightRequest="80">
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                              VerticalOptions="Center">
+                            <!-- Imagen de medalla -->
+                            <Image Source="{Binding MedalImage}"
+                                   WidthRequest="32"
+                                   HeightRequest="32"
+                                   VerticalOptions="Center"
+                                   Margin="0,0,10,0"/>
+
+                            <!-- Nombre -->
+                            <Label Text="{Binding Name}"
+                                   FontSize="26"
+                                   TextColor="#f0f0f0"
+                                   FontAttributes="Bold"
+                                   Grid.Column="1"
+                                   VerticalOptions="Center" />
+
+                            <!-- Score -->
+                            <Label Text="{Binding HighestScore, StringFormat='Score: {0}'}"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="#9e180d"
+                                   Grid.Column="2"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="End" />
+                        </Grid>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </VerticalStackLayout>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
 </ContentPage>

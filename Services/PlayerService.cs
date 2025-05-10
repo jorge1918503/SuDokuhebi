@@ -59,5 +59,25 @@ namespace SuDokuhebi.Services
 
             return PasswordHasher.VerifyPassword(password, player.password);
         }
+
+
+        public async Task<Player> GetPlayerByIdAsync(int playerId)
+        {
+            return await _context.Players.FindAsync(playerId);
+        }
+
+        public async Task UpdatePlayerAsync(Player player)
+        {
+            _context.Players.Update(player);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Player>> GetPlayersOrderedByHighestScoreAsync()
+        {
+            using var context = new AppDbContext();
+            return await context.Players
+                .OrderByDescending(p => p.highestScore)
+                .ToListAsync();
+        }
     }
 }

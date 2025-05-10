@@ -8,20 +8,20 @@
 
     
    <VerticalStackLayout HorizontalOptions="Center"
-                        VerticalOptions="Center">  
+                        VerticalOptions="Center"
+                        BackgroundColor="#a06236">  
 
        <!-- Título de victoria -->  
        <Label Text="¡Has ganado!"  
               FontSize="38"  
               FontAttributes="Bold"
-              TextColor="#b83dba"
+              TextColor="#000"
               HorizontalTextAlignment="Center" />  
 
-       <!-- Línea separadora   
-       <BoxView HeightRequest="2"  
-                Color="#4CAF50"  
+       <BoxView HeightRequest="2"
+                 Color="#643f26"  
                 WidthRequest="160"  
-                HorizontalOptions="Center" />  -->
+                HorizontalOptions="Center" />
 
        <!-- Movimientos -->  
        <Label x:Name="MovementsLabel"  
@@ -39,8 +39,8 @@
        <Button Text="Volver al Menú"  
                FontSize="18"  
                FontAttributes="Bold"
-               BackgroundColor="#d77cd9"  
-               TextColor="#333"  
+               BackgroundColor="#c3801a"  
+               TextColor="#000"  
                CornerRadius="12"  
                Padding="10"  
                Clicked="OnOkClicked"  

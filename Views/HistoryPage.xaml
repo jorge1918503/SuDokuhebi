@@ -1,12 +1,81 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SuDokuhebi.ViewModels"
              x:Class="SuDokuhebi.Views.HistoryPage"
              Title="‎                     Historial                     ‎ ">
-    <VerticalStackLayout>
-        <Label 
-            Text="Soy la History Page"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.BindingContext>
+        <local:HistoryViewModel />
+    </ContentPage.BindingContext>
+
+
+    <Grid RowDefinitions="Auto,600"
+          Padding="10">
+
+        <!-- Título -->
+        <Label Text="{Binding PlayerName, StringFormat='Historial de Partidas de {0}'}"
+               FontSize="32"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               Margin="0,20,0,20"
+               Grid.Row="0" />
+
+        <!-- Lista de partidas -->
+        <CollectionView ItemsSource="{Binding Games}"
+                        Grid.Row="1">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border StrokeShape="RoundRectangle 12"
+                            BackgroundColor="#d77cd9"
+                            Padding="10"
+                            Margin="0,0,0,12"
+                            WidthRequest="500">
+                        <Grid ColumnDefinitions="*, Auto"
+                              RowDefinitions="Auto, Auto, Auto, Auto">
+
+                            <!-- Fila 0: Dificultad y Resultado -->
+                            <Label Text="{Binding difficulty}"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="#9e180d"
+                                   Grid.Row="0"
+                                   Grid.Column="0" />
+
+                            <Label Text="{Binding result}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="White"
+                                   HorizontalOptions="End"
+                                   Grid.Row="0"
+                                   Grid.Column="1" />
+
+                            <!-- Fila 1: Tiempo -->
+                            <Label Text="{Binding time, StringFormat='Tiempo: {0:mm\\:ss}'}"
+                                   FontSize="16"
+                                   TextColor="#f0f0f0"
+                                   Grid.Row="1"
+                                   Grid.ColumnSpan="2" />
+
+                            <!-- Fila 2: Movimientos -->
+                            <Label Text="{Binding movements, StringFormat='Movimientos: {0}'}"
+                                   FontSize="16"
+                                   TextColor="#f0f0f0"
+                                   Grid.Row="2"
+                                   Grid.ColumnSpan="2" />
+
+                            <!-- Fila 3: Score -->
+                            <Label Text="{Binding score, StringFormat='Score: {0}'}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#9e180d"
+                                   HorizontalOptions="End"
+                                   Grid.Row="3"
+                                   Grid.ColumnSpan="2" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

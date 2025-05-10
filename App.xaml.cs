@@ -36,7 +36,7 @@ namespace SuDokuhebi
             window.Y = (screenHeight - newHeight) / 2;
 
             // Establecer el título de la ventana
-            window.Title = "SuDokuhebi";
+            window.Title = string.Empty;
 
             return window;
         }

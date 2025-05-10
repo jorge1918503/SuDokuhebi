@@ -46,4 +46,14 @@ public partial class PlayPage : ContentPage
         // Cambiar a una página sin tabs (por ejemplo, el juego)
         Application.Current.MainPage = new NavigationPage(new GameImposiblePage());
     }
+
+    private async void OnLogOutClicked(object sender, EventArgs e)
+    {
+        SessionManager.ClearGame();
+        SessionManager.ClearSession();
+
+        await Task.Delay(500);
+
+        Application.Current.MainPage = new NavigationPage(new WelcomePage());
+    }
 }

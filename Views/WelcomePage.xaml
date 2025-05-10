@@ -12,7 +12,7 @@
         
         <!--Bienvenido-->
         <Label Text="Bienvenido guerrero"
-               FontSize="25"
+               FontSize="30"
                FontAttributes="Bold"
                HorizontalTextAlignment="Center"/>
 
@@ -22,6 +22,7 @@
                HorizontalTextAlignment="Center"/>
         <Label Text="Evita las zonas venenosas"
                FontSize="20"
+               TextColor="#b83dba"
                HorizontalTextAlignment="Center" />
         <Label Text="Prueba los diferentes modos de juego"
                FontSize="20"

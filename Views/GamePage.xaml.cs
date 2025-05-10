@@ -20,6 +20,7 @@ public partial class GamePage : ContentPage
     private int _secondsElapsed;
     private int movements;
 
+    private readonly PlayerService _playerService;
     private readonly GameService _gameService;
 
     private readonly IAudioManager _audioManager;
@@ -28,6 +29,7 @@ public partial class GamePage : ContentPage
     {
         InitializeComponent();
         _audioManager = AudioManager.Current;
+        _playerService = new PlayerService();
         _gameService = new GameService();
 
         // Detectar el tamaño del grid
@@ -283,6 +285,15 @@ public partial class GamePage : ContentPage
 
         // Guardar partida en la base de datos
         await _gameService.SaveGame(SessionManager.CurrentUserId, difficulty, SessionManager.CurrentResult, TimeSpan.FromSeconds(_secondsElapsed), movements, score);
+
+        // actualizar highest score
+        var player = await _playerService.GetPlayerByIdAsync(SessionManager.CurrentUserId);  // obtener jugador actual
+
+        if (player != null && score > player.highestScore) // si el score es mayor al anterior
+        {
+            player.highestScore = score;
+            await _playerService.UpdatePlayerAsync(player);
+        }
     }
 
     private bool checkWinLost()

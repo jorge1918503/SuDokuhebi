@@ -39,11 +39,14 @@ namespace SuDokuhebi.Services
         }
 
 
-        private async Task<List<Game>> GetAllGames()
+        public async Task<List<Game>> GetGamesByPlayerIdAsync(int playerId)
         {
-            return await _context.Games.ToListAsync();
+            using var context = new AppDbContext();
+            return await context.Games
+                .Where(g => g.id_player == playerId)
+                .OrderByDescending(g => g.score)
+                .ToListAsync();
         }
-
 
     }
 }
