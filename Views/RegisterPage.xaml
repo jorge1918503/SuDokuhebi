@@ -6,14 +6,30 @@
                          WidthRequest="500"
                          VerticalOptions="Center">
 
+        <Image Source="sudokuhebi.png"
+               HeightRequest="100"
+               WidthRequest="300" />
+
+        <!--<Label Text="Registrate"
+               FontSize="40"
+               FontAttributes="Bold"
+               TextColor="#d77cd9"
+               HorizontalOptions="Center"/>-->
+        
         <Image Source="personajetrans.png"
                WidthRequest="200"
-               HeightRequest="200" />
+               HeightRequest="200" 
+               />
 
         <Entry x:Name="UsernameEntry"
                Placeholder="Usuario"
                PlaceholderColor="White"/>
         <Entry x:Name="PasswordEntry"
+               Placeholder="Contraseña"
+               PlaceholderColor="White"
+               IsPassword="True"
+               Completed="OnPasswordEntryCompleted" />
+        <Entry x:Name="Password2Entry"
                Placeholder="Contraseña"
                PlaceholderColor="White"
                IsPassword="True"

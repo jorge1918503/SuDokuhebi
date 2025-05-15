@@ -6,7 +6,18 @@
     <VerticalStackLayout Spacing="20"
                          WidthRequest="500"
                          VerticalOptions="Center">
-       
+        
+        <Image Source="sudokuhebi.png"
+               HeightRequest="100"
+               WidthRequest="300"/>
+
+        <!--<Label Text="Inicia Sesión"
+               FontSize="40"
+               FontAttributes="Bold"
+               TextColor="#d77cd9"
+               HorizontalOptions="Center"
+               />-->
+
         <Image Source="serpiente.png"
                WidthRequest="200"
                HeightRequest="200" />
@@ -33,7 +44,8 @@
                 FontAttributes="Bold"
                 Clicked="OnRegisterClicked"
                 WidthRequest="400"
-                BackgroundColor="#d77cd9" />
+                BackgroundColor="#d77cd9" 
+                Margin="0,0,0,60"/>
 
         <Label x:Name="messageLabel"
                TextColor="Red" 

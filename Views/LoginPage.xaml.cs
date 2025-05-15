@@ -10,6 +10,9 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
         _playerService = new PlayerService();
+        usernameEntry.Text = "";
+        passwordEntry.Text = "";
+        messageLabel.Text = "";
     }
 
     private async void OnLoginClicked(object sender, EventArgs e)
@@ -63,6 +66,7 @@ public partial class LoginPage : ContentPage
     {
         usernameEntry.Text = "";
         passwordEntry.Text = "";
+        messageLabel.Text = "";
         await Navigation.PushAsync(new RegisterPage());
     }
 

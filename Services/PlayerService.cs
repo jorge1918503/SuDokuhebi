@@ -19,7 +19,7 @@ namespace SuDokuhebi.Services
             _context = new AppDbContext();
         }
 
-        public async Task<string> RegisterPlayer(string username, string password)
+        public async Task<string> RegisterPlayer(string username, string password, string password2)
         {
             // Validar que el usuario no exista ya en la base de datos
             var existingPlayer = await _context.Players.FirstOrDefaultAsync(p => p.name == username);
@@ -27,8 +27,12 @@ namespace SuDokuhebi.Services
                 return "El jugador ya existe";
 
             // Validar que los campos no estén vacíos
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(password2))
                 return "Usuario y contraseña son obligatorios";
+
+            // Validar que las contraseñas coincidan
+            if (password != password2)
+                return "Las contraseñas no coinciden";
 
             // Hashear contraseña
             string hashedPassword = PasswordHasher.HashPassword(password);

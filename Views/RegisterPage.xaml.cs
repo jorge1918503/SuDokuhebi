@@ -10,6 +10,10 @@ public partial class RegisterPage : ContentPage
     {
         InitializeComponent();
         _playerService = new PlayerService();
+        UsernameEntry.Text = "";
+        PasswordEntry.Text = "";
+        Password2Entry.Text = "";
+        MessageLabel.Text = "";
     }
 
     private async void OnRegisterClicked(object sender, EventArgs e)
@@ -20,8 +24,9 @@ public partial class RegisterPage : ContentPage
 
         string username = UsernameEntry.Text;
         string password = PasswordEntry.Text;
+        string password2 = Password2Entry.Text;
 
-        string result = await _playerService.RegisterPlayer(username, password);
+        string result = await _playerService.RegisterPlayer(username, password, password2);
 
         if (result == "Jugador registrado correctamente")
         {
@@ -39,6 +44,7 @@ public partial class RegisterPage : ContentPage
             MessageLabel.Text = result;
             UsernameEntry.Text = "";
             PasswordEntry.Text = "";
+            Password2Entry.Text = "";
         }
 
         // Rehabilitar el botón después de que se complete el procesamiento
@@ -49,6 +55,7 @@ public partial class RegisterPage : ContentPage
     {
         UsernameEntry.Text = "";
         PasswordEntry.Text = "";
+        MessageLabel.Text = "";
         await Navigation.PopAsync();
     }
 
