@@ -21,6 +21,23 @@
                Margin="0,20,0,20"
                Grid.Row="0" />
 
+        <!-- Picker para seleccionar el filtro -->
+        <Picker Title="Ordenar por"
+                SelectedIndexChanged="OnFilterChanged"
+                Grid.Row="0"
+                HorizontalOptions="End"
+                Margin="0,30,0,0">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Dificultad</x:String>
+                    <x:String>Resultado</x:String>
+                    <x:String>Puntuación</x:String>
+                    <x:String>Tiempo</x:String>
+                    <x:String>Movimientos</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
         <!-- Lista de partidas -->
         <CollectionView ItemsSource="{Binding Games}"
                         Grid.Row="1">

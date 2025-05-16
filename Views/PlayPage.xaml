@@ -17,8 +17,9 @@
         <ImageButton Source="logout.png"
                      Grid.Row="0"
                      HorizontalOptions="End"
-                     WidthRequest="120"
+                     WidthRequest="40"
                      HeightRequest="30"
+                     CornerRadius="10"
                      BackgroundColor="#b83dba"
                      Clicked="OnLogOutClicked" />
 

@@ -6,10 +6,10 @@
     <VerticalStackLayout Spacing="20"
                          WidthRequest="500"
                          VerticalOptions="Center">
-        
+
         <Image Source="sudokuhebi.png"
                HeightRequest="100"
-               WidthRequest="300"/>
+               WidthRequest="300" />
 
         <!--<Label Text="Inicia Sesión"
                FontSize="40"
@@ -21,15 +21,29 @@
         <Image Source="serpiente.png"
                WidthRequest="200"
                HeightRequest="200" />
-        
+
         <Entry x:Name="usernameEntry"
-               Placeholder="Usuario" 
-               PlaceholderColor="White"/>
-        <Entry x:Name="passwordEntry"
-               Placeholder="Contraseña"
-               PlaceholderColor="White"
-               IsPassword="True"
-               Completed="OnPasswordEntryCompleted" />
+               Placeholder="Usuario"
+               PlaceholderColor="White" />
+        <Grid>
+            <Entry x:Name="passwordEntry"
+                   Placeholder="Contraseña"
+                   PlaceholderColor="White"
+                   IsPassword="True"
+                   Completed="OnPasswordEntryCompleted"
+                   HorizontalOptions="FillAndExpand" />
+
+            <ImageButton x:Name="togglePasswordVisibilityButton"
+                         Source="eye_closed.png"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Clicked="OnTogglePasswordVisibilityClicked"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         Margin="0,0,10,0" />
+        </Grid>
+
 
         <Button Text="Iniciar Sesión"
                 TextColor="Black"
@@ -44,11 +58,11 @@
                 FontAttributes="Bold"
                 Clicked="OnRegisterClicked"
                 WidthRequest="400"
-                BackgroundColor="#d77cd9" 
-                Margin="0,0,0,60"/>
+                BackgroundColor="#d77cd9"
+                Margin="0,0,0,60" />
 
         <Label x:Name="messageLabel"
-               TextColor="Red" 
-               HorizontalOptions="Center"/>
+               TextColor="Red"
+               HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

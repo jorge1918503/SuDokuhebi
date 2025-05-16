@@ -43,7 +43,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		
+		<MauiIcon Include="Resources\AppIcon\logoicon.png" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
 		<MauiSplasScreen Include="Resourcer\Splash\logogpt.png" Color="#512BD4" BaseSize="128,128" />
@@ -60,16 +60,6 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\logout.png" />
-	  <MauiImage Remove="Resources\Images\partidablur.png" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiAsset Include="Resources\Images\logout.png" />
-	  <MauiAsset Include="Resources\Images\partidablur.png" />
 	</ItemGroup>
 
 	<ItemGroup>

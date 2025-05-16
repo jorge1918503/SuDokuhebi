@@ -65,4 +65,25 @@ public partial class RegisterPage : ContentPage
         OnRegisterClicked(RegisterButton, EventArgs.Empty);
     }
 
+
+    bool isPasswordVisible = false;
+    private void OnTogglePasswordVisibilityClicked(object sender, EventArgs e)
+    {
+        isPasswordVisible = !isPasswordVisible;
+        PasswordEntry.IsPassword = !isPasswordVisible;
+
+        togglePasswordVisibilityButton.Source = isPasswordVisible ? "eye_open.png" : "eye_closed.png";
+    }
+
+
+    bool isPassword2Visible = false;
+    private void OnTogglePassword2VisibilityClicked(object sender, EventArgs e)
+    {
+        isPassword2Visible = !isPassword2Visible;
+        Password2Entry.IsPassword = !isPassword2Visible;
+
+        togglePassword2VisibilityButton.Source = isPassword2Visible ? "eye_open.png" : "eye_closed.png";
+    }
+
+
 }

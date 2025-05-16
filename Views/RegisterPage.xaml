@@ -24,16 +24,42 @@
         <Entry x:Name="UsernameEntry"
                Placeholder="Usuario"
                PlaceholderColor="White"/>
-        <Entry x:Name="PasswordEntry"
-               Placeholder="Contraseña"
-               PlaceholderColor="White"
-               IsPassword="True"
-               Completed="OnPasswordEntryCompleted" />
-        <Entry x:Name="Password2Entry"
-               Placeholder="Contraseña"
-               PlaceholderColor="White"
-               IsPassword="True"
-               Completed="OnPasswordEntryCompleted" />
+        <Grid>
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Contraseña"
+                   PlaceholderColor="White"
+                   IsPassword="True"
+                   Completed="OnPasswordEntryCompleted"
+                   HorizontalOptions="FillAndExpand" />
+
+            <ImageButton x:Name="togglePasswordVisibilityButton"
+                         Source="eye_closed.png"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Clicked="OnTogglePasswordVisibilityClicked"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         Margin="0,0,10,0" />
+        </Grid>
+        <Grid>
+            <Entry x:Name="Password2Entry"
+                   Placeholder="Contraseña"
+                   PlaceholderColor="White"
+                   IsPassword="True"
+                   Completed="OnPasswordEntryCompleted"
+                   HorizontalOptions="FillAndExpand" />
+
+            <ImageButton x:Name="togglePassword2VisibilityButton"
+                         Source="eye_closed.png"
+                         BackgroundColor="Transparent"
+                         HorizontalOptions="End"
+                         VerticalOptions="Center"
+                         Clicked="OnTogglePassword2VisibilityClicked"
+                         WidthRequest="30"
+                         HeightRequest="30"
+                         Margin="0,0,10,0" />
+        </Grid>
 
         <Button Text="Registrar"
                 TextColor="Black"

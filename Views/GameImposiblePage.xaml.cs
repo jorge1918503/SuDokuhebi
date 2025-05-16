@@ -289,8 +289,10 @@ public partial class GameImposiblePage : ContentPage
     {
         _timer.Stop(); // Detiene el tiempo al ganar
 
+        int segundos = 60 - _secondsElapsed;
+
         // Calcular score
-        int score = 1000 - (int)(_secondsElapsed * 10) - (movements * 10) + 500; // + bonus de dificultad
+        int score = 1000 - (int)(segundos * 10) - (movements * 10) + 500; // + bonus de dificultad
 
         if (SessionManager.CurrentResult == "Derrota") score = 0;
 
@@ -298,7 +300,7 @@ public partial class GameImposiblePage : ContentPage
         string difficulty = SessionManager.CurrentDifficulty?.ToString() ?? "Error";
 
         // Guardar partida en la base de datos
-        await _gameService.SaveGame(SessionManager.CurrentUserId, difficulty, SessionManager.CurrentResult, TimeSpan.FromSeconds(_secondsElapsed), movements, score);
+        await _gameService.SaveGame(SessionManager.CurrentUserId, difficulty, SessionManager.CurrentResult, TimeSpan.FromSeconds(segundos), movements, score);
 
         // actualizar highest score
         var player = await _playerService.GetPlayerByIdAsync(SessionManager.CurrentUserId);  // obtener jugador actual

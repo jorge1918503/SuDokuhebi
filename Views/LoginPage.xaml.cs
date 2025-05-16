@@ -75,4 +75,15 @@ public partial class LoginPage : ContentPage
     {
         OnLoginClicked(loginButton, EventArgs.Empty);
     }
+
+
+    bool isPasswordVisible = false;
+    private void OnTogglePasswordVisibilityClicked(object sender, EventArgs e)
+    {
+        isPasswordVisible = !isPasswordVisible;
+        passwordEntry.IsPassword = !isPasswordVisible;
+
+        togglePasswordVisibilityButton.Source = isPasswordVisible ? "eye_open.png" : "eye_closed.png";
+    }
+
 }
