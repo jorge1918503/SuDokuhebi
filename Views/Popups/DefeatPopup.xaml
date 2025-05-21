@@ -8,7 +8,9 @@
 
     <VerticalStackLayout HorizontalOptions="Center"
                          VerticalOptions="Center"
-                         BackgroundColor="#294922">
+                         BackgroundColor="#294922"
+                         WidthRequest="350"
+                         HeightRequest="400">
 
         <!-- Título de victoria -->
         <Label Text="¡Has perdido!"
@@ -41,8 +43,19 @@
                 BackgroundColor="#fac52b"
                 TextColor="#000"
                 CornerRadius="12"
-                Padding="10"
+                Margin="0,10,0,0"
                 Clicked="OnOkClicked"
+                HorizontalOptions="Center"
+                WidthRequest="180" />
+
+        <Button Text="Jugar de nuevo"
+                FontSize="18"
+                FontAttributes="Bold"
+                BackgroundColor="#fac52b"
+                TextColor="#000"
+                CornerRadius="12"
+                Margin="10"
+                Clicked="OnAgainClicked"
                 HorizontalOptions="Center"
                 WidthRequest="180" />
     </VerticalStackLayout>

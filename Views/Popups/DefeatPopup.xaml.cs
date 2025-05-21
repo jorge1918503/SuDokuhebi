@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using Plugin.Maui.Audio;
+using SuDokuhebi.Utils;
 
 namespace SuDokuhebi.Views.Popups;
 
@@ -27,7 +28,42 @@ public partial class DefeatPopup : Popup
 
     private void OnOkClicked(object sender, EventArgs e)
     {
-        Close(true); // Cerrar el popup
+        Close("again"); // Cerrar el popup
+    }
+
+    private async void OnAgainClicked(object sender, EventArgs e)
+    {
+        switch (SessionManager.CurrentDifficulty)
+        {
+            case DifficultyLevel.Fácil:
+                SessionManager.CurrentDifficulty = DifficultyLevel.Fácil;
+                Application.Current.MainPage = new NavigationPage(new GamePage());
+                Close("again"); // Cerrar el popup
+                break;
+
+            case DifficultyLevel.Medio:
+                SessionManager.CurrentDifficulty = DifficultyLevel.Medio;
+                Application.Current.MainPage = new NavigationPage(new GamePage());
+                Close("again"); // Cerrar el popup
+                break;
+
+            case DifficultyLevel.Difícil:
+                SessionManager.CurrentDifficulty = DifficultyLevel.Difícil;
+                Application.Current.MainPage = new NavigationPage(new GameShootPage());
+                Close("again"); // Cerrar el popup
+                break;
+
+            case DifficultyLevel.Imposible:
+                SessionManager.CurrentDifficulty = DifficultyLevel.Imposible;
+                Application.Current.MainPage = new NavigationPage(new GameImposiblePage());
+                Close("again"); // Cerrar el popup
+                break;
+
+            default:
+                // En caso de valor inesperado, puedes navegar a una página por defecto o lanzar una excepción.
+                await Application.Current.MainPage.DisplayAlert("Error", "Dificultad desconocida", "OK");
+                break;
+        }
     }
 
     private async void PlayDefeatSound()

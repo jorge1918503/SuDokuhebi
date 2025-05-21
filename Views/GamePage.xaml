@@ -44,12 +44,27 @@
             <!-- Celdas del Sudoku se generan dinámicamente -->
         </Grid>
 
-        <Button Text="Reiniciar"
-                Clicked="OnRestartClicked"
-                BackgroundColor="LightGray"
-                FontSize="18"
-                Margin="10"
-                WidthRequest="700" />
+        <HorizontalStackLayout WidthRequest="700">
+
+            <ImageButton Source="back.png"
+                         Clicked="OnBackClicked"
+                         BackgroundColor="#d77cd9"
+                         Margin="10"
+                         WidthRequest="100" 
+                         CornerRadius="10"/>
+
+            <Button Text="Reiniciar"
+                    TextColor="white"
+                    Clicked="OnRestartClicked"
+                    BackgroundColor="#d77cd9"
+                    FontSize="18"
+                    Margin="420,10,0,10"
+                    WidthRequest="150"
+                    HorizontalOptions="Center" />
+
+        </HorizontalStackLayout>
+        
+        
 
 
     </VerticalStackLayout>

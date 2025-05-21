@@ -207,11 +207,15 @@ public partial class GameShootPage : ContentPage
                 var result = await this.ShowPopupAsync(popup);
 
                 // Solo después de que el popup se cierre, navega al menú
-                if (result is bool ok && ok)
+                if (result == "menu")
                 {
-                    await Task.Delay(200);
                     SessionManager.ClearGame();
                     Application.Current.Windows[0].Page = new MenuTabbedPage();
+                }
+                else if (result == "again")
+                {
+                    // Reiniciar el juego u otra acción
+                    Application.Current.Windows[0].Page = new NavigationPage(new GameShootPage());
                 }
 
             }
@@ -251,11 +255,15 @@ public partial class GameShootPage : ContentPage
                     var result = await this.ShowPopupAsync(popup);
 
                     // Solo después de que el popup se cierre, navega al menú
-                    if (result is bool ok && ok)
+                    if (result == "menu")
                     {
-                        await Task.Delay(200);
                         SessionManager.ClearGame();
                         Application.Current.Windows[0].Page = new MenuTabbedPage();
+                    }
+                    else if (result == "again")
+                    {
+                        // Reiniciar el juego u otra acción
+                        Application.Current.Windows[0].Page = new NavigationPage(new GameShootPage());
                     }
 
                 }
@@ -276,11 +284,15 @@ public partial class GameShootPage : ContentPage
             var result = await this.ShowPopupAsync(popup);
 
             // Solo después de que el popup se cierre, navega al menú
-            if (result is bool ok && ok)
+            if (result == "menu")
             {
-                await Task.Delay(200);
                 SessionManager.ClearGame();
                 Application.Current.Windows[0].Page = new MenuTabbedPage();
+            }
+            else if (result == "again")
+            {
+                // Reiniciar el juego u otra acción
+                Application.Current.Windows[0].Page = new NavigationPage(new GameShootPage());
             }
         }
 
@@ -518,6 +530,27 @@ public partial class GameShootPage : ContentPage
             }
             if (snakeRow != -1) break;
         }
+    }
+
+    private async void OnBackClicked(object sender, EventArgs e)
+    {
+        _timer.Stop();
+
+
+        bool answer = await DisplayAlert("¿Quieres salir del juego?", "La partida no se guardará", "Sí", "No");
+
+        if (answer)
+        {
+            // El usuario pulsó "Sí"
+            SessionManager.ClearGame();
+            Application.Current.Windows[0].Page = new MenuTabbedPage();
+        }
+        else
+        {
+            // El usuario pulsó "No"
+            _timer.Start();
+        }
+
     }
 
     private void OnRestartClicked(object sender, EventArgs e)
