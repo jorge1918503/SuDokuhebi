@@ -49,6 +49,16 @@ public partial class PlayPage : ContentPage
 
     private async void OnLogOutClicked(object sender, EventArgs e)
     {
+        bool confirm = await DisplayAlert(
+            "¿Cerrar sesión?",
+            "¿Estás seguro?",
+            "Sí",
+            "No");
+
+        if (!confirm)
+            return; // El usuario canceló
+
+        // El usuario confirmó, proceder a cerrar sesión
         SessionManager.ClearGame();
         SessionManager.ClearSession();
 
@@ -56,4 +66,5 @@ public partial class PlayPage : ContentPage
 
         Application.Current.MainPage = new NavigationPage(new WelcomePage());
     }
+
 }

@@ -53,15 +53,18 @@ namespace SuDokuhebi.Services
 
         public async Task<bool> AuthenticatePlayer(string username, string password)
         {
-
             var player = await _context.Players.FirstOrDefaultAsync(p => p.name == username);
             if (player == null)
                 return false;
 
-            // Guardar el nombre de usuario y el ID del jugador en la sesión
-            SessionManager.SetSession(player.name, player.id_player);
+            bool passwordValid = PasswordHasher.VerifyPassword(password, player.password);
+            if (passwordValid)
+            {
+                // Guardar en Preferences a través de SessionManager
+                SessionManager.SetSession(player.name, player.id_player);
+            }
 
-            return PasswordHasher.VerifyPassword(password, player.password);
+            return passwordValid;
         }
 
 
