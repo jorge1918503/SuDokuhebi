@@ -6,6 +6,16 @@
     <Grid RowDefinitions="Auto,auto,auto"
           Padding="10">
 
+        <Label x:Name="UsernameLabel" 
+               Grid.Row="0"
+               Grid.Column="0"
+               Text=""
+               TextColor="#b83dba"
+               FontSize="35"
+               FontAttributes="Bold"
+               HorizontalOptions="Start"
+               Margin="10,20,0,20" />
+
         <Label Grid.Row="0"
                Grid.Column="0"
                Text="Elige tu dificultad"
@@ -28,7 +38,7 @@
                Source="partidablur.png"
                WidthRequest="500"
                HeightRequest="400"
-               Margin="10" />
+               Margin="0,0,0,20" />
 
 
 
@@ -36,7 +46,7 @@
               Grid.Column="0"
               HorizontalOptions="Center"
               ColumnDefinitions="200,200,200,200"
-              RowDefinitions="auto,25,40,auto">
+              RowDefinitions="auto,65,40,auto">
 
             <Button Grid.Column="0"
                     Grid.Row="0"
@@ -52,12 +62,13 @@
 
             <Label Grid.Row="1"
                    Grid.Column="0"
-                   Text="Una forma sencilla de comenzar"
-                   HorizontalTextAlignment="Center" />
+                   Text="El juego clásico en miniatura"
+                   HorizontalTextAlignment="Center" 
+                   WidthRequest="100"/>
 
             <Label Grid.Row="2"
                    Grid.Column="0"
-                   Text="Un pequeño campo de batalla"
+                   Text="No te confies aunque las distancias sean cortas"
                    HorizontalTextAlignment="Center" />
 
             <Button Grid.Column="1"
@@ -74,12 +85,13 @@
 
             <Label Grid.Row="1"
                    Grid.Column="1"
-                   Text="El juego clásico"
-                   HorizontalTextAlignment="Center" />
+                   Text="Asesta el golpe letal a la serpiente siendo tu quien se avalanza sobre ella"
+                   HorizontalTextAlignment="Center" 
+                   WidthRequest="170"/>
 
             <Label Grid.Row="2"
                    Grid.Column="1"
-                   Text="Una experiencia predeterminada"
+                   Text="Deja que ella se acerque a ti y muere"
                    HorizontalTextAlignment="Center" />
 
             <Button Grid.Column="2"
@@ -96,13 +108,15 @@
 
             <Label Grid.Row="1"
                    Grid.Column="2"
-                   Text="¿Cómo llevas la puntería?"
-                   HorizontalTextAlignment="Center" />
+                   Text="Cuadra la cabeza de la serpiente en una de tus miras"
+                   HorizontalTextAlignment="Center" 
+                   WidthRequest="190"/>
 
             <Label Grid.Row="2"
                    Grid.Column="2"
                    Text="No te acerques demasiado y dispara!!"
-                   HorizontalTextAlignment="Center" />
+                   HorizontalTextAlignment="Center" 
+                   WidthRequest="180"/>
 
             <Button Grid.Column="3"
                     Grid.Row="0"
@@ -118,8 +132,9 @@
 
             <Label Grid.Row="1"
                    Grid.Column="3"
-                   Text="El reto imposible"
-                   HorizontalTextAlignment="Center" />
+                   Text="Una serpiente más inteligente que nunca"
+                   HorizontalTextAlignment="Center" 
+                   WidthRequest="190"/>
 
             <Label Grid.Row="2"
                    Grid.Column="3"
@@ -129,7 +144,8 @@
             <Label Grid.Row="3"
                    Grid.Column="3"
                    Text="Dispara y sobretodo huye!!"
-                   HorizontalTextAlignment="Center" />
+                   HorizontalTextAlignment="Center" 
+                   Margin="-15"/>
 
         </Grid>
     </Grid>

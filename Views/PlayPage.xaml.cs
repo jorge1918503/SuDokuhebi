@@ -18,6 +18,13 @@ public partial class PlayPage : ContentPage
         }
 
     }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        UsernameLabel.Text = SessionManager.CurrentUser;
+    }
+
 
     private async void OnEasyClicked(object sender, EventArgs e)
     {
