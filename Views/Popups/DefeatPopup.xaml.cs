@@ -17,18 +17,27 @@ public partial class DefeatPopup : Popup
         {
             PlayDefeatSound();
         }
-        
+
 
         MovementsLabel.Text = $"Movimientos: {movements}";
-
         var time = TimeSpan.FromSeconds(timeElapsed);
+
+        if (SessionManager.CurrentDifficulty == DifficultyLevel.Imposible)
+        {
+            time = TimeSpan.FromSeconds(60 - timeElapsed);
+        }
+        else
+        {
+            time = TimeSpan.FromSeconds(timeElapsed);
+        }
+
         TimeLabel.Text = $"Tiempo: {time:mm\\:ss}";
 
     }
 
     private void OnOkClicked(object sender, EventArgs e)
     {
-        Close("again"); // Cerrar el popup
+        Close("menu"); // Cerrar el popup
     }
 
     private async void OnAgainClicked(object sender, EventArgs e)

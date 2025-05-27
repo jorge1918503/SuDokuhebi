@@ -18,7 +18,7 @@ namespace SuDokuhebi.Data
         {
             // PC: DESKTOP-JGJ7PPK
             // Portatil: DESKTOP-MNJ6T8T\SQLEXPRESS
-            options.UseSqlServer("Server=DESKTOP-JGJ7PPK;Database=SuDokuhebi;User Id=sa;Password=123456;TrustServerCertificate=True;");
+            options.UseSqlServer("Server=DESKTOP-MNJ6T8T\\SQLEXPRESS;Database=SuDokuhebi;User Id=sa;Password=123456;TrustServerCertificate=True;");
         }
     }
 }
