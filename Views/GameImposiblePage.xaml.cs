@@ -268,11 +268,11 @@ public partial class GameImposiblePage : ContentPage
                 }
             }
 
-
+            shootSnakeCellColor();
 
 
         }
-        else if (button.BackgroundColor == Colors.yellowSnakeEye && cells[row, col].SnakeHead)
+        else if (button.BackgroundColor == Colors.red && cells[row, col].SnakeHead)
         {
 
             SessionManager.CurrentResult = "Victoria";
@@ -446,6 +446,20 @@ public partial class GameImposiblePage : ContentPage
         if (i >= 0 && i < gridSize && j >= 0 && j < gridSize)
         {
             if (buttons[i, j].BackgroundColor == Colors.white) buttons[i, j].BackgroundColor = Colors.yellowSnakeEye;
+        }
+    }
+
+    private void shootSnakeCellColor()
+    {
+        for (int row = 0; row < cells.GetLength(0); row++)
+        {
+            for (int col = 0; col < cells.GetLength(1); col++)
+            {
+                if (cells[row, col].SnakeHead && buttons[row, col].BackgroundColor == Colors.yellowSnakeEye)
+                {
+                    buttons[row, col].BackgroundColor = Colors.red;
+                }
+            }
         }
     }
 

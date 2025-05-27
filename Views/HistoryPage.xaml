@@ -26,7 +26,7 @@
                 SelectedIndexChanged="OnFilterChanged"
                 Grid.Row="0"
                 HorizontalOptions="End"
-                Margin="0,60,0,0">
+                Margin="0,55,0,0">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Dificultad</x:String>
@@ -41,7 +41,7 @@
         <!-- Lista de partidas -->
         <CollectionView ItemsSource="{Binding Games}"
                         Grid.Row="1"
-                        Margin="-30">
+                        Margin="-15">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border StrokeShape="RoundRectangle 12"
