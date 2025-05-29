@@ -32,13 +32,15 @@ public partial class GamePage : ContentPage
         _playerService = new PlayerService();
         _gameService = new GameService();
 
-        // Detectar el tamaño del grid
+        // Detectar el tamaño del tablero según la dificultad
         if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) gridSize = 6;
         else gridSize = 9;
-
+        // mapa de objetos ImageButton
         buttons = new ImageButton[gridSize, gridSize];
+        // mapa de objetos Cell
         cells = new Cell[gridSize, gridSize];
 
+        // timer
         _timer = new System.Timers.Timer(1000);
         _timer.Elapsed += (s, e) => UpdateTimer();
         _timer.AutoReset = true;
@@ -313,7 +315,7 @@ public partial class GamePage : ContentPage
         int playerRow, playerCol;
         playerPosition(rows, cols, out playerRow, out playerCol);
 
-        // Encuentra la posicion de la serpiente
+        // Encuentra la posicion actual de la serpiente
         int snakeRow, snakeCol;
         snakePosition(rows, cols, out snakeRow, out snakeCol);
 
@@ -424,12 +426,12 @@ public partial class GamePage : ContentPage
 
         Random rnd = new Random();
 
-        bool useSmartMove = rnd.NextDouble() < 0.40; // 45% de las veces elige la mejor dirección
+        bool useSmartMove = rnd.NextDouble() < 0.40; // 40% de las veces elige la mejor dirección
         if (SessionManager.CurrentDifficulty == DifficultyLevel.Fácil) useSmartMove = rnd.NextDouble() < 0.1;
 
         if (useSmartMove)
         {
-            // Ordena por distancia al jugador (inteligente)
+            // Ordena por distancia al jugador
             directions = directions
                 .OrderBy(dir =>
                 {
