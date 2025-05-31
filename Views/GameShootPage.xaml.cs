@@ -481,7 +481,7 @@ public partial class GameShootPage : ContentPage
 
         Random rnd = new Random();
 
-        bool useSmartMove = rnd.NextDouble() < 0.63; // 70% de las veces elige la mejor dirección
+        bool useSmartMove = rnd.NextDouble() < 0.63; // 63% de las veces elige la mejor dirección
 
         if (useSmartMove)
         {

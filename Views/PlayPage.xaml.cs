@@ -22,7 +22,7 @@ public partial class PlayPage : ContentPage
     {
         base.OnAppearing();
 
-        UsernameLabel.Text = $"Hola, {SessionManager.CurrentUser}";
+        UsernameLabel.Text = SessionManager.CurrentUser;
     }
 
 

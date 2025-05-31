@@ -6,6 +6,24 @@
     <Grid RowDefinitions="Auto,auto,auto"
           Padding="10">
 
+        <Frame Grid.Row="0"
+               Grid.Column="0"
+               WidthRequest="50"
+               HeightRequest="50"
+               Padding="0"
+               Margin="0,15,0,20"
+               CornerRadius="25"
+               IsClippedToBounds="True"
+               HasShadow="False"
+               HorizontalOptions="Start"
+               VerticalOptions="Center">
+            <Image Source="avatar.png"
+                   Aspect="AspectFill"
+                   WidthRequest="50"
+                   HeightRequest="50" />
+        </Frame>
+
+
         <Label x:Name="UsernameLabel" 
                Grid.Row="0"
                Grid.Column="0"
@@ -14,7 +32,7 @@
                FontSize="30"
                FontAttributes="Bold"
                HorizontalOptions="Start"
-               Margin="10,20,0,20" 
+               Margin="60,20,0,20" 
                WidthRequest="270"/>
 
         <Label Grid.Row="0"
