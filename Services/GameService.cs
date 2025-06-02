@@ -41,6 +41,7 @@ namespace SuDokuhebi.Services
 
         public async Task<List<Game>> GetGamesByPlayerIdAsync(int playerId)
         {
+            // Obtener los juegos del jugador por su ID 
             using var context = new AppDbContext();
             return await context.Games
                 .Where(g => g.id_player == playerId)

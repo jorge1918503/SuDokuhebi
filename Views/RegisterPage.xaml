@@ -10,12 +10,6 @@
                HeightRequest="100"
                WidthRequest="300" />
 
-        <!--<Label Text="Registrate"
-               FontSize="40"
-               FontAttributes="Bold"
-               TextColor="#d77cd9"
-               HorizontalOptions="Center"/>-->
-        
         <Image Source="personajetrans.png"
                WidthRequest="200"
                HeightRequest="200" 

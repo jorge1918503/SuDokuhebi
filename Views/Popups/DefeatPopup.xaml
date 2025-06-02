@@ -4,6 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="SuDokuhebi.Views.Popups.DefeatPopup"
                Size="350, 350"
+               Color="#294922"
                CanBeDismissedByTappingOutsideOfPopup="False">
 
     <VerticalStackLayout HorizontalOptions="Center"
@@ -27,13 +28,15 @@
         <!-- Movimientos -->
         <Label x:Name="MovementsLabel"
                FontSize="20"
-               TextColor="#000"
+               FontAttributes="Bold"
+               TextColor="#fff"
                HorizontalTextAlignment="Center" />
 
         <!-- Tiempo -->
         <Label x:Name="TimeLabel"
                FontSize="20"
-               TextColor="#000"
+               FontAttributes="Bold"
+               TextColor="#fff"
                HorizontalTextAlignment="Center" />
 
         <!-- Botón de navegación -->

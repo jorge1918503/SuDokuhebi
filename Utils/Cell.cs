@@ -8,12 +8,12 @@ namespace SuDokuhebi.Utils
 {
     class Cell
     {
-        private bool purpleZone;
-        private bool playerIn;
-        private bool snakeIn;
-        private bool snakeHead;
-        private int row;
-        private int col;
+        private bool purpleZone; // zona venenosa
+        private bool playerIn;   // jugador en la celda    
+        private bool snakeIn;    // cuerpo de la serpiente en la celda
+        private bool snakeHead;  // cabeza de la serpiente en la celda
+        private int row;         // fila
+        private int col;         // columna
 
         public Cell() { }
 

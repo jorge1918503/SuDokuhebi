@@ -272,6 +272,7 @@ public partial class GameImposiblePage : ContentPage
 
 
         }
+        // la cabeza de la serpiente en tu mira
         else if (button.BackgroundColor == Colors.red && cells[row, col].SnakeHead)
         {
 
@@ -299,14 +300,14 @@ public partial class GameImposiblePage : ContentPage
 
     private async Task saveGame()
     {
-        _timer.Stop(); // Detiene el tiempo al ganar
+        _timer.Stop(); // Detiene el tiempo
 
         int segundos = 60 - _secondsElapsed;
 
         // Calcular score
         int score = 1000 - (int)(segundos * 10) - (movements * 10) + 500; // + bonus de dificultad
 
-        if (SessionManager.CurrentResult == "Derrota") score = 0;
+        if (SessionManager.CurrentResult == "Derrota") score = 0; // score 0 si pierdes
 
         // Validar que CurrentDifficulty no sea nulo antes de llamar a ToString()
         string difficulty = SessionManager.CurrentDifficulty?.ToString() ?? "Error";
@@ -320,7 +321,7 @@ public partial class GameImposiblePage : ContentPage
         if (player != null && score > player.highestScore) // si el score es mayor al anterior
         {
             player.highestScore = score;
-            await _playerService.UpdatePlayerAsync(player);
+            await _playerService.UpdatePlayerAsync(player); // actualizar highestScore del jugador
         }
     }
 
@@ -468,9 +469,11 @@ public partial class GameImposiblePage : ContentPage
         int rows = cells.GetLength(0);
         int cols = cells.GetLength(1);
 
+        // posicion de la serpiente
         int snakeRow, snakeCol;
         snakePosition(rows, cols, out snakeRow, out snakeCol);
 
+        // posicion del jugador
         int playerRow, playerCol;
         playerPosition(rows, cols, out playerRow, out playerCol);
 
@@ -483,17 +486,17 @@ public partial class GameImposiblePage : ContentPage
 
         if (useSmartMove)
         {
-            // Ordena por distancia al jugador (inteligente)
+            // Ordena por distancia al jugador
             directions = directions
                 .OrderBy(dir =>
                 {
                     int newRow = snakeRow + dir.dRow;
                     int newCol = snakeCol + dir.dCol;
-
+                    // si la direccion esta fuera del tablero o hay serpiente se pone la ultima
                     if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || cells[newRow, newCol].SnakeIn)
                         return int.MaxValue;
-
-                    int distance = Math.Abs(playerRow - newRow) + Math.Abs(playerCol - newCol);
+                    // cuanto menor sea la distancia entre los dos puntos mas prioridad se le dará
+                    int distance = Math.Abs(playerRow - newRow) + Math.Abs(playerCol - newCol); // distancia Manhattan
                     return distance;
                 }).ToList();
         }
@@ -601,15 +604,19 @@ public partial class GameImposiblePage : ContentPage
         await saveGame();
 
         // Mostrar popup y esperar a que se cierre
-        var popup = new DefeatPopup(movements, 60, _soundEnabled);
+        var popup = new DefeatPopup(movements, 0, _soundEnabled);
         var result = await this.ShowPopupAsync(popup);
 
         // Solo después de que el popup se cierre, navega al menú
-        if (result is bool ok && ok)
+        if (result == "menu")
         {
-            await Task.Delay(200);
             SessionManager.ClearGame();
             Application.Current.Windows[0].Page = new MenuTabbedPage();
+        }
+        else if (result == "again")
+        {
+            // Reiniciar el juego u otra acción
+            Application.Current.Windows[0].Page = new NavigationPage(new GameImposiblePage());
         }
     }
 

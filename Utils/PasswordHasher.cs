@@ -8,7 +8,7 @@ namespace SuDokuhebi.Utils
 {
     public static class PasswordHasher
     {
-        // Genera el hash de la contraseña con un salt aleatorio
+        // Genera el hash de la contraseña
         public static string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);

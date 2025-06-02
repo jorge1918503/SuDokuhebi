@@ -14,7 +14,7 @@ public partial class GamePage : ContentPage
     private ImageButton[,] buttons;
     private Cell[,] cells;
 
-    private int gridSize; // ← NUEVA variable para manejar tamaño dinámico
+    private int gridSize;
 
     private System.Timers.Timer _timer;
     private int _secondsElapsed;
@@ -142,6 +142,7 @@ public partial class GamePage : ContentPage
     {
         var button = sender as ImageButton;
 
+        // zona venenosa
         if (button.BackgroundColor == Colors.purple)
         {
             button.BackgroundColor = Colors.lightPurple;
@@ -157,6 +158,7 @@ public partial class GamePage : ContentPage
             await Task.Delay(500);
             button.BackgroundColor = Colors.purple;
         }
+        // movimiento posible
         else if (button.BackgroundColor == Colors.LightGreen)
         {
             // busca la anterior posision del personaje y la limpia
@@ -415,9 +417,11 @@ public partial class GamePage : ContentPage
         int rows = cells.GetLength(0);
         int cols = cells.GetLength(1);
 
+        // posicion de la serpiente
         int snakeRow, snakeCol;
         snakePosition(rows, cols, out snakeRow, out snakeCol);
 
+        // posicion del jugador
         int playerRow, playerCol;
         playerPosition(rows, cols, out playerRow, out playerCol);
 
@@ -437,11 +441,11 @@ public partial class GamePage : ContentPage
                 {
                     int newRow = snakeRow + dir.dRow;
                     int newCol = snakeCol + dir.dCol;
-
+                    // si la direccion esta fuera del tablero o hay serpiente se pone la ultima
                     if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols || cells[newRow, newCol].SnakeIn)
                         return int.MaxValue;
-
-                    int distance = Math.Abs(playerRow - newRow) + Math.Abs(playerCol - newCol);
+                    // cuanto menor sea la distancia entre los dos puntos mas prioridad se le dará
+                    int distance = Math.Abs(playerRow - newRow) + Math.Abs(playerCol - newCol); // distancia Manhattan
                     return distance;
                 }).ToList();
         }

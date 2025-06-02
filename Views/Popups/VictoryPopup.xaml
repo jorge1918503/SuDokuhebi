@@ -4,6 +4,7 @@
                xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                x:Class="SuDokuhebi.Views.Popups.VictoryPopup"  
                Size="350, 350"
+               Color="#a06236"
                CanBeDismissedByTappingOutsideOfPopup="False">  
 
     
@@ -17,7 +18,7 @@
        <Label Text="¡Has ganado!"  
               FontSize="38"  
               FontAttributes="Bold"
-               TextColor="#643f26"
+               TextColor="#000"
               HorizontalTextAlignment="Center" />  
 
        <BoxView HeightRequest="3"
@@ -28,13 +29,13 @@
        <!-- Movimientos -->  
        <Label x:Name="MovementsLabel"  
               FontSize="20"  
-              TextColor="#333"  
+              TextColor="#000"  
               HorizontalTextAlignment="Center" />  
 
        <!-- Tiempo -->  
        <Label x:Name="TimeLabel"  
               FontSize="20"  
-              TextColor="#333"  
+              TextColor="#000"  
               HorizontalTextAlignment="Center" />  
 
        <!-- Botón de navegación -->  

@@ -11,13 +11,6 @@
                HeightRequest="100"
                WidthRequest="300" />
 
-        <!--<Label Text="Inicia Sesión"
-               FontSize="40"
-               FontAttributes="Bold"
-               TextColor="#d77cd9"
-               HorizontalOptions="Center"
-               />-->
-
         <Image Source="serpiente.png"
                WidthRequest="200"
                HeightRequest="200" />

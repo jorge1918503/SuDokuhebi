@@ -18,7 +18,7 @@ namespace SuDokuhebi.Models
 
         [Required]
         [MaxLength(255)]
-        public string password { get; set; } // Guardar hashes en producción
+        public string password { get; set; }
 
         [Required]
         [MaxLength(50)]

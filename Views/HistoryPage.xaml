@@ -10,7 +10,7 @@
     </ContentPage.BindingContext>
 
 
-    <Grid RowDefinitions="Auto,600"
+    <Grid RowDefinitions="Auto,820"
           Padding="10">
 
         <!-- Título -->
@@ -52,7 +52,7 @@
                         <Grid ColumnDefinitions="*, Auto"
                               RowDefinitions="Auto, Auto, Auto, Auto">
 
-                            <!-- Fila 0: Dificultad y Resultado -->
+                            <!-- Dificultad y Resultado -->
                             <Label Text="{Binding difficulty}"
                                    FontSize="22"
                                    FontAttributes="Bold"
@@ -68,21 +68,21 @@
                                    Grid.Row="0"
                                    Grid.Column="1" />
 
-                            <!-- Fila 1: Tiempo -->
+                            <!-- Tiempo -->
                             <Label Text="{Binding time, StringFormat='Tiempo: {0:mm\\:ss}'}"
                                    FontSize="16"
                                    TextColor="#f0f0f0"
                                    Grid.Row="1"
                                    Grid.ColumnSpan="2" />
 
-                            <!-- Fila 2: Movimientos -->
+                            <!-- Movimientos -->
                             <Label Text="{Binding movements, StringFormat='Movimientos: {0}'}"
                                    FontSize="16"
                                    TextColor="#f0f0f0"
                                    Grid.Row="2"
                                    Grid.ColumnSpan="2" />
 
-                            <!-- Fila 3: Score -->
+                            <!-- Score -->
                             <Label Text="{Binding score, StringFormat='Score: {0}'}"
                                    FontSize="18"
                                    FontAttributes="Bold"

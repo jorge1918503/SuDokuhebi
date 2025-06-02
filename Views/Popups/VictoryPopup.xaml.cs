@@ -29,12 +29,13 @@ public partial class VictoryPopup : Popup
 
     private void OnOkClicked(object sender, EventArgs e)
     {
-        Close("menu"); // Cerrar el popup
+        Close("menu"); // Cerrar el popup y vuelve al menú principal
 
     }
 
     private async void OnAgainClicked(object sender, EventArgs e)
     {
+        // Al clicar "Jugar de nuevo", se reinicia la partida según la dificultad actual
         switch (SessionManager.CurrentDifficulty)
         {
             case DifficultyLevel.Fácil:
@@ -71,6 +72,7 @@ public partial class VictoryPopup : Popup
 
     private async void PlayKillSound()
     {
+        // Reproduce un sonido diferente según la dificultad actual
         if (SessionManager.CurrentDifficulty == DifficultyLevel.Difícil || SessionManager.CurrentDifficulty == DifficultyLevel.Imposible)
         {
             var audioStream = await FileSystem.OpenAppPackageFileAsync("tirachinas.mp3");
@@ -89,6 +91,7 @@ public partial class VictoryPopup : Popup
 
     private async void PlayVictorySound()
     {
+        // Reproduce el sonido de victoria 
         await Task.Delay(700);
         var audioStream = await FileSystem.OpenAppPackageFileAsync("victory.mp3");
         var player = _audioManager.CreatePlayer(audioStream);

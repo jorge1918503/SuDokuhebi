@@ -37,7 +37,7 @@ public partial class DefeatPopup : Popup
 
     private void OnOkClicked(object sender, EventArgs e)
     {
-        Close("menu"); // Cerrar el popup
+        Close("menu"); // Cerrar el popup y vuelve al menú principal
     }
 
     private async void OnAgainClicked(object sender, EventArgs e)
@@ -69,7 +69,6 @@ public partial class DefeatPopup : Popup
                 break;
 
             default:
-                // En caso de valor inesperado, puedes navegar a una página por defecto o lanzar una excepción.
                 await Application.Current.MainPage.DisplayAlert("Error", "Dificultad desconocida", "OK");
                 break;
         }
@@ -77,7 +76,7 @@ public partial class DefeatPopup : Popup
 
     private async void PlayDefeatSound()
     {
-        // Fix: Use the correct method from IAudioManager to create a player
+        // Reproduce el sonido de derrota
         var audioStream = await FileSystem.OpenAppPackageFileAsync("snakebite.mp3");
         var player = _audioManager.CreatePlayer(audioStream);
         player.Loop = false;

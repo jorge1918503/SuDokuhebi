@@ -17,11 +17,12 @@ namespace SuDokuhebi.ViewModels
 
         // Esta lista mantiene todas las partidas cargadas inicialmente
         private List<Game> AllGames { get; set; } = new();
-
+        // Nombre del jugador actual
         public string PlayerName => SessionManager.CurrentUser ?? "UnknownUser";
 
         public async Task LoadHistoryAsync()
         {
+            // Cargar el historial de partidas del jugador actual
             var gameService = new GameService();
             var games = await gameService.GetGamesByPlayerIdAsync(SessionManager.CurrentUserId);
 
@@ -40,6 +41,7 @@ namespace SuDokuhebi.ViewModels
 
             switch (field)
             {
+                // Filtrar por dificultad (ponemos nosotros el orden)
                 case "difficulty":
                     var difficultyOrder = new List<string> { "Imposible", "Difícil", "Medio", "Fácil" };
                     filtered = AllGames.OrderBy(g =>
@@ -48,19 +50,19 @@ namespace SuDokuhebi.ViewModels
                         return index >= 0 ? index : int.MaxValue;
                     });
                     break;
-
+                // Filtrar por resultado
                 case "result":
                     filtered = AllGames.OrderByDescending(g => g.result);
                     break;
-
+                // Filtrar por puntuación
                 case "score":
                     filtered = AllGames.OrderByDescending(g => g.score);
                     break;
-
+                // Filtrar por tiempo
                 case "time":
                     filtered = AllGames.OrderBy(g => g.time);
                     break;
-
+                // Filtrar por movimientos
                 case "movements":
                     filtered = AllGames.OrderBy(g => g.movements);
                     break;

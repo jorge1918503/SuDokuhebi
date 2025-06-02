@@ -46,7 +46,7 @@ namespace SuDokuhebi.Utils
             Preferences.Remove(IsLoggedInKey);
         }
 
-        // Datos de la partida actual (NO persistentes)
+        // Datos de la partida actual
         public static DifficultyLevel? CurrentDifficulty { get; set; } = null;
         public static string CurrentResult { get; set; } = string.Empty;
 

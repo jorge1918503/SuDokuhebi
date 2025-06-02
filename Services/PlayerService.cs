@@ -70,17 +70,20 @@ namespace SuDokuhebi.Services
 
         public async Task<Player> GetPlayerByIdAsync(int playerId)
         {
+            // Buscar al jugador por su ID
             return await _context.Players.FindAsync(playerId);
         }
 
         public async Task UpdatePlayerAsync(Player player)
         {
+            // Actualizar jugador
             _context.Players.Update(player);
             await _context.SaveChangesAsync();
         }
 
         public async Task<List<Player>> GetPlayersOrderedByHighestScoreAsync()
         {
+            // Obtener todos los jugadores ordenados por su score más alto
             using var context = new AppDbContext();
             return await context.Players
                 .OrderByDescending(p => p.highestScore)
